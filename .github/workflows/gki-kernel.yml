@@ -541,7 +541,8 @@ jobs:
           cd "$CONFIG"
 
           # 设置构建时间 (6.1+)
-          perl -pi -e 's/build-timestamp = \$\(or \$\(KBUILD_BUILD_TIMESTAMP\), \$\(build-timestamp-auto\)\)/build-timestamp = "Mon Jun 23 07:30:57 UTC 2025"/' ./common/init/Makefile
+          # perl -pi -e 's/build-timestamp = \$\(or \$\(KBUILD_BUILD_TIMESTAMP\), \$\(build-timestamp-auto\)\)/build-timestamp = "Mon Jun 23 07:30:57 UTC 2025"/' ./common/init/Makefile
+          perl -pi -e 's/build-timestamp = \$\(or \$\(KBUILD_BUILD_TIMESTAMP\), \$\(build-timestamp-auto\)\)/build-timestamp = "Thu Dec 19 17:58:46 UTC 2024"/' ./common/init/Makefile
           # 删除导出文件
           sed -i '/^[[:space:]]*"protected_exports_list"[[:space:]]*:[[:space:]]*"android\/abi_gki_protected_exports_aarch64",$/d' ./common/BUILD.bazel
           rm -rf ./common/android/abi_gki_protected_exports_*
@@ -553,7 +554,8 @@ jobs:
           echo "更改为配置目录: $CONFIG..."
           cd "$CONFIG"
 
-          perl -0777 -pi -e 's/(echo "\$\{KERNELVERSION\}\$\{file_localversion\}\$\{config_localversion\}\$\{LOCALVERSION\}\$\{scm_version\}")/echo "6.6.89-android15-8-g14220ae4ce65-ab13680582-4k"/s' ./common/scripts/setlocalversion
+          # perl -0777 -pi -e 's/(echo "\$\{KERNELVERSION\}\$\{file_localversion\}\$\{config_localversion\}\$\{LOCALVERSION\}\$\{scm_version\}")/echo "6.6.89-android15-8-g14220ae4ce65-ab13680582-4k"/s' ./common/scripts/setlocalversion
+          perl -0777 -pi -e 's/(echo "\$\{KERNELVERSION\}\$\{file_localversion\}\$\{config_localversion\}\$\{LOCALVERSION\}\$\{scm_version\}")/echo "6.6.56-android15-8-g38447e018c92-ab12829524-4k"/s' ./common/scripts/setlocalversion
 
           if [ -f "build/build.sh" ]; then
             sed -i 's/-dirty//' ./common/scripts/setlocalversion
@@ -735,7 +737,8 @@ jobs:
 
           echo "Building boot.img"
           $MKBOOTIMG --header_version 4 --kernel Image --output boot.img
-          $AVBTOOL add_hash_footer --partition_name boot --partition_size $((96 * 1024 * 1024)) --image boot.img --algorithm SHA256_RSA4096 --key $BOOT_SIGN_KEY_PATH --rollback_index 1757364229 --prop 'com.android.build.boot.os_version:15' --prop  'com.android.build.boot.fingerprint:Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.11.263_251105_PRC:user/release-keys' --prop 'com.android.build.boot.security_patch:2025-10-05'
+          # $AVBTOOL add_hash_footer --partition_name boot --partition_size $((96 * 1024 * 1024)) --image boot.img --algorithm SHA256_RSA4096 --key $BOOT_SIGN_KEY_PATH --rollback_index 1757364229 --prop 'com.android.build.boot.os_version:15' --prop  'com.android.build.boot.fingerprint:Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.11.263_251105_PRC:user/release-keys' --prop 'com.android.build.boot.security_patch:2025-02-05'
+          $AVBTOOL  add_hash_footer --partition_name boot --partition_size $((96 * 1024 * 1024)) --image boot.img --algorithm SHA256_RSA4096 --key $BOOT_SIGN_KEY_PATH --rollback_index 1738713600 --prop 'com.android.build.boot.os_version:15' --prop  'com.android.build.boot.fingerprint:Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.10.043_250510_PRC:user/release-keys' --prop 'com.android.build.boot.security_patch:2025-02-05'
           cp ./boot.img ../${{ inputs.android_version }}-${{ inputs.kernel_version }}.${{ inputs.sub_level }}-${{ inputs.os_patch_level }}-boot.img
 
       - name: 上传编译资产
