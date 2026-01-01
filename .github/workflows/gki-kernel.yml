@@ -452,6 +452,18 @@ jobs:
             patch -p1 -F 3 < 69_hide_stuff.patch
           fi
 
+      - name: 应用 Unicode 绕过补丁
+        run: |
+          echo "更改为配置目录: $CONFIG..."
+          cd "$CONFIG/common"
+          echo "Applying Unicode bypass fix patch..."
+          if [ "${{ inputs.kernel_version }}" == "6.1" ] || [ "${{ inputs.kernel_version }}" == "6.6" ]; then
+            cp ../../kernel_patches/common/unicode_bypass_fix_6.1+.patch ./unicode_bypass_fix.patch
+          elif [ "${{ inputs.kernel_version }}" == "5.15" ] || [ "${{ inputs.kernel_version }}" == "5.10" ]; then
+            cp ../../kernel_patches/common/unicode_bypass_fix_6.1-.patch ./unicode_bypass_fix.patch
+          fi
+          patch -p1 -F 3 < unicode_bypass_fix.patch || true
+
       - name: LZ4KD & Lz4k_oplus配置
         if: ${{ inputs.use_zram }}
         run: |
