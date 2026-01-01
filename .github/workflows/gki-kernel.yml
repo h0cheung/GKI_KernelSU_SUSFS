@@ -70,6 +70,9 @@ jobs:
       CCACHE_HARDLINK: "true"
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Maximize Build Space
         uses: AdityaGarg8/remove-unwanted-software@v5
         with:
@@ -376,9 +379,11 @@ jobs:
         if: ${{ inputs.use_hymofs && (inputs.android_version == 'android14' || inputs.android_version == 'android15') }}
         run: |
           cd "$CONFIG/common"
-          VERSION="${{ inputs.android_version }}"
 
-          echo "Detected Version: $VERSION"
+          if [ "${{ inputs.kernel_version }}" == "6.6" ] && [ "${{ inputs.use_susfs }}" == "false" ]; then
+            echo "Applying fix-hymofs-blankline.patch for 6.6 (SUSFS disabled)"
+            patch -p1 < $GITHUB_WORKSPACE/patches/fix-hymofs-blankline.patch
+          fi
 
           curl -LSs https://raw.githubusercontent.com/Anatdx/HymoFS/main/setup.sh | bash -s defconfig arch/arm64/configs/gki_defconfig
 

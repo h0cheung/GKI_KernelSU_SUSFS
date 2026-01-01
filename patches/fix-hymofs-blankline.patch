@@ -1,0 +1,10 @@
+--- src_origin/kernel/reboot.c	2026-01-01 15:55:22
++++ src_modified/kernel/reboot.c	2026-01-01 15:54:59
+@@ -708,6 +708,7 @@
+ 	char buffer[256];
+ 	int ret = 0;
+ 
++
+ 	/* We only trust the superuser with rebooting the system. */
+ 	if (!ns_capable(pid_ns->user_ns, CAP_SYS_BOOT))
+ 		return -EPERM;
