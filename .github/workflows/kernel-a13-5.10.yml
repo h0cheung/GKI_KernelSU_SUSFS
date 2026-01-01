@@ -42,6 +42,11 @@ on:
         required: true
         type: boolean
         default: true
+      use_hymofs:
+        description: '是否启用 HymoFS 混合挂载? (仅限 GKI 6.1/6.6)'
+        required: true
+        type: boolean
+        default: true
   
 jobs:
   build-kernel-a13-5-10-kernelsu-susfs:
@@ -85,3 +90,4 @@ jobs:
       supp_op: ${{ inputs.supp_op || false }}
       BBG: ${{ inputs.BBG || false }}
       use_susfs: ${{ inputs.use_susfs }}
+      use_hymofs: ${{ inputs.use_hymofs }}
