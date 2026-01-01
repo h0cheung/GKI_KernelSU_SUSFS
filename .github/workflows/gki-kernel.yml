@@ -379,6 +379,9 @@ jobs:
           curl -LSs https://raw.githubusercontent.com/Anatdx/HymoFS/main/setup.sh | bash -s defconfig arch/arm64/configs/gki_defconfig
 
           echo "CFLAGS_hymofs.o := -Wno-unused-variable -Wno-bitwise-instead-of-logical" >> fs/Makefile
+          if [ "${{ inputs.use_susfs }}" == "false" ]; then
+            echo "CONFIG_HYMOFS_USE_KSU=n" >> arch/arm64/configs/gki_defconfig
+          fi
 
       - name: 应用 Manual Hook 补丁 (无 SUSFS)
         if: ${{ !inputs.use_susfs }}
