@@ -33,6 +33,7 @@ on:
         - Next
         - MKSU
         - SukiSU
+        - ReSukiSU
         default: SukiSU
       kernelsu_branch:
         description: "Select KSU branch"
@@ -377,6 +378,17 @@ jobs:
             rm -rf suki-tmp
             echo "RELEASE_NAME=\"GKI Kernel: SukiSU ($KSU_VERSION) & ${{ env.SUSFS_LABEL }}\"" >> $GITHUB_ENV
             
+          elif [ "${{ inputs.kernelsu_variant }}" = "ReSukiSU" ]; then
+            echo "Processing ReSukiSU variant"
+            git clone https://github.com/ReSukiSU/ReSukiSU.git resuki-tmp
+            cd resuki-tmp
+            KSU_GIT_VERSION=$(git rev-list --count HEAD)
+            KSU_VERSION=$((10000 + KSU_GIT_VERSION + 30000))
+            echo "ReSukiSU version: $KSU_VERSION"
+            cd ..
+            rm -rf resuki-tmp
+            echo "RELEASE_NAME=\"GKI Kernel: ReSukiSU ($KSU_VERSION) & ${{ env.SUSFS_LABEL }}\"" >> $GITHUB_ENV
+            
           else
             echo "Using default naming for variant: ${{ inputs.kernelsu_variant }}"
             echo "RELEASE_NAME=\"GKI Kernel: ${{ inputs.kernelsu_variant }} & ${{ env.SUSFS_LABEL }}\"" >> $GITHUB_ENV
@@ -436,6 +448,9 @@ jobs:
           elif [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
             KSU_REPO_URL="https://github.com/ShirkNeko/KernelSU.git"
             KSU_REPO_URL2="ShirkNeko/KernelSU"
+          elif [ "${{ inputs.kernelsu_variant }}" == "ReSukiSU" ]; then
+            KSU_REPO_URL="https://github.com/ReSukiSU/ReSukiSU.git"
+            KSU_REPO_URL2="ReSukiSU/ReSukiSU"
           else
             echo "Warning: Unknown KernelSU variant selected. Defaulting to Official for URL generation."
             KSU_REPO_URL="https://github.com/tiann/KernelSU.git"
@@ -466,6 +481,8 @@ jobs:
             FINAL_RELEASE_NOTES+="\nMKSU Manager:\n-> https://github.com/5ec1cff/KernelSU"
           elif [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
             FINAL_RELEASE_NOTES+="\nSukiSU Manager:\n-> https://github.com/ShirkNeko/SukiSU-Ultra"
+          elif [ "${{ inputs.kernelsu_variant }}" == "ReSukiSU" ]; then
+            FINAL_RELEASE_NOTES+="\nReSukiSU Manager:\n-> https://github.com/ReSukiSU/ReSukiSU"
           fi
           
           FINAL_RELEASE_NOTES+="\n\nLTO: thin"
