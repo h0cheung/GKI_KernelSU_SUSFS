@@ -366,15 +366,6 @@ jobs:
             patch -p1 --fuzz=3 < 50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch || true
           fi
 
-      - name: 应用 Manual Hook 补丁 (无 SUSFS)
-        if: ${{ !inputs.use_susfs }}
-        run: |
-          echo "更改为配置目录: $CONFIG..."
-          cd "$CONFIG/common"
-          echo "Applying Manual Hook patch (SUSFS disabled)..."
-          cp ../../kernel_patches/sukisu/scope_min_manual_hooks_v1.6_fix.patch ./
-          patch -p1 -F 3 < scope_min_manual_hooks_v1.6_fix.patch
-
       - name: HymoFS 补丁
         if: ${{ inputs.use_hymofs && (inputs.android_version == 'android14' || inputs.android_version == 'android15') }}
         run: |
@@ -388,6 +379,14 @@ jobs:
           curl -LSs https://raw.githubusercontent.com/Anatdx/HymoFS/main/setup.sh | bash -s defconfig arch/arm64/configs/gki_defconfig
 
           echo "CFLAGS_hymofs.o := -Wno-unused-variable -Wno-bitwise-instead-of-logical" >> fs/Makefile
+
+      - name: 应用 Manual Hook 补丁 (无 SUSFS)
+        if: ${{ !inputs.use_susfs }}
+        run: |
+          echo "更改为配置目录: $CONFIG..."
+          cd "$CONFIG/common"
+          echo "Applying Manual Hook patch (SUSFS disabled)..."
+          patch -p1 -F 3 < $GITHUB_WORKSPACE/patches/sukisu-manual-hook.patch
 
       - name: 一些修复补丁
         run: |
