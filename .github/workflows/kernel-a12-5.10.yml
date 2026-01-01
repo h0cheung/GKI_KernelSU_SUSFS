@@ -41,6 +41,11 @@ on:
         required: true
         type: boolean
         default: false
+      use_susfs:
+        description: '是否启用 SUSFS?'
+        required: true
+        type: boolean
+        default: true
   
 jobs:
   build-kernel-a12-5-10-kernelsu-susfs:
@@ -107,4 +112,5 @@ jobs:
       use_kpm: ${{ inputs.use_kpm }}
       supp_op: ${{ inputs.supp_op || false }}
       BBG: ${{ inputs.BBG || false }}
+      use_susfs: ${{ inputs.use_susfs }}
 

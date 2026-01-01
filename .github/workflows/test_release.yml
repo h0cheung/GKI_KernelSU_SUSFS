@@ -67,6 +67,11 @@ on:
         required: true
         type: boolean
         default: false
+      use_susfs:
+        description: '是否启用 SUSFS?'
+        required: true
+        type: boolean
+        default: true
 
 jobs:
   get_manager:
@@ -88,6 +93,7 @@ jobs:
       use_zram: ${{ inputs.use_zram }}
       use_kpm: ${{ inputs.use_kpm }}
       BBG: ${{ inputs.BBG }}
+      use_susfs: ${{ inputs.use_susfs }}
 
   build-kernel-a13-5-10:
     if: contains(github.event.inputs.kernels_to_build, 'all') || contains(github.event.inputs.kernels_to_build, 'a13-5.10')
@@ -101,6 +107,7 @@ jobs:
       use_zram: ${{ inputs.use_zram }}
       use_kpm: ${{ inputs.use_kpm }}
       BBG: ${{ inputs.BBG }}
+      use_susfs: ${{ inputs.use_susfs }}
 
   build-kernel-a13-5-15:
     if: contains(github.event.inputs.kernels_to_build, 'all') || contains(github.event.inputs.kernels_to_build, 'a13-5.15')
@@ -114,6 +121,7 @@ jobs:
       use_zram: ${{ inputs.use_zram }}
       use_kpm: ${{ inputs.use_kpm }}
       BBG: ${{ inputs.BBG }}
+      use_susfs: ${{ inputs.use_susfs }}
 
   build-kernel-a14-5-15:
     if: contains(github.event.inputs.kernels_to_build, 'all') || contains(github.event.inputs.kernels_to_build, 'a14-5.15')
@@ -127,6 +135,7 @@ jobs:
       use_zram: ${{ inputs.use_zram }}
       use_kpm: ${{ inputs.use_kpm }}
       BBG: ${{ inputs.BBG }}
+      use_susfs: ${{ inputs.use_susfs }}
 
   build-kernel-a14-6-1:
     if: contains(github.event.inputs.kernels_to_build, 'all') || contains(github.event.inputs.kernels_to_build, 'a14-6.1')
@@ -140,6 +149,7 @@ jobs:
       use_zram: ${{ inputs.use_zram }}
       use_kpm: ${{ inputs.use_kpm }}
       BBG: ${{ inputs.BBG }}
+      use_susfs: ${{ inputs.use_susfs }}
 
   build-kernel-a15-6-6:
     if: contains(github.event.inputs.kernels_to_build, 'all') || contains(github.event.inputs.kernels_to_build, 'a15-6.6')
@@ -153,6 +163,7 @@ jobs:
       use_zram: ${{ inputs.use_zram }}
       use_kpm: ${{ inputs.use_kpm }}
       BBG: ${{ inputs.BBG }}
+      use_susfs: ${{ inputs.use_susfs }}
 
   check-build-status:
     runs-on: ubuntu-latest
@@ -249,13 +260,16 @@ jobs:
       REPO_OWNER: ShirkNeko
       REPO_NAME: GKI_KernelSU_SUSFS
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SUSFS_LABEL: ${{ inputs.use_susfs && 'SUSFS ඞ v2.0.0' || 'NoSUSFS (Manual Hook)' }}
       RELEASE_NAME: "GKI Kernel: ${{ inputs.kernelsu_variant == 'Next' && 'KernelSU-' || '' }} ${{ inputs.kernelsu_variant }}"
       INITIAL_RELEASE_NOTES: |
         This release includes **${{ inputs.kernelsu_variant == 'Next' && 'KernelSU' || '' }}${{ inputs.kernelsu_variant }}**
         
+        **SUSFS Status: ${{ inputs.use_susfs && 'Enabled ✅' || 'Disabled ❌ (Manual Hook Mode)' }}**
+        
         Features:
         -> ${{ inputs.kernelsu_variant == 'Next' && 'KernelSU-' || '' }}${{ inputs.kernelsu_variant }}-${{ inputs.kernelsu_branch }}
-        -> SUSFS ඞ v2.0.0
+        ${{ inputs.use_susfs && '-> SUSFS ඞ v2.0.0' || '-> Manual Hook (No SUSFS)' }}
         -> Manual Syscall Hooks for better hiding
         -> Magic Mount Support
         -> Simple hiding for LineageOS detection
@@ -350,7 +364,7 @@ jobs:
             echo "Next version: $KSU_VERSION"
             cd ..
             rm -rf ksu-next-tmp
-            echo "RELEASE_NAME=\"GKI Kernel: KernelSU-Next ($KSU_VERSION) & SUSFS v2.0.0\"" >> $GITHUB_ENV
+            echo "RELEASE_NAME=\"GKI Kernel: KernelSU-Next ($KSU_VERSION) & ${{ env.SUSFS_LABEL }}\"" >> $GITHUB_ENV
             
           elif [ "${{ inputs.kernelsu_variant }}" = "SukiSU" ]; then
             echo "Processing SukiSU variant"
@@ -361,11 +375,11 @@ jobs:
             echo "SukiSU version: $KSU_VERSION"
             cd ..
             rm -rf suki-tmp
-            echo "RELEASE_NAME=\"GKI Kernel: SukiSU ($KSU_VERSION) & SUSFS v2.0.0\"" >> $GITHUB_ENV
+            echo "RELEASE_NAME=\"GKI Kernel: SukiSU ($KSU_VERSION) & ${{ env.SUSFS_LABEL }}\"" >> $GITHUB_ENV
             
           else
             echo "Using default naming for variant: ${{ inputs.kernelsu_variant }}"
-            echo "RELEASE_NAME=\"GKI Kernel: ${{ inputs.kernelsu_variant }} & SUSFS v2.0.0\"" >> $GITHUB_ENV
+            echo "RELEASE_NAME=\"GKI Kernel: ${{ inputs.kernelsu_variant }} & ${{ env.SUSFS_LABEL }}\"" >> $GITHUB_ENV
           fi
           
       - name: Fetch KSU and SUSFS Commit Info
@@ -459,66 +473,71 @@ jobs:
           FINAL_RELEASE_NOTES+="\n<summary>Commit Information</summary>"
           FINAL_RELEASE_NOTES+="\n\nCommit hashes and links (the following commits refer to the progress of KSU or SUSFS at the time of this compilation):"
           FINAL_RELEASE_NOTES+="\n- **KernelSU is ${{ inputs.kernelsu_variant }}-${KSU_BRANCH}** (Commit): [${KSU_REF}](${KSU_URL})"
-          FINAL_RELEASE_NOTES+="\n- **SUSFS4KSU** (Commit):"
           
-          GITLAB_OWNER="simonpunk"
-          GITLAB_REPO="susfs4ksu"
+          if [ "${{ inputs.use_susfs }}" == "true" ]; then
+            FINAL_RELEASE_NOTES+="\n- **SUSFS4KSU** (Commit):"
           
-          declare -A BRANCH_MAP=(
-            ["a12-5.10"]="gki-android12-5.10"
-            ["a13-5.10"]="gki-android13-5.10"
-            ["a13-5.15"]="gki-android13-5.15"
-            ["a14-5.15"]="gki-android14-5.15"
-            ["a14-6.1"]="gki-android14-6.1"
-            ["a15-6.6"]="gki-android15-6.6"
-          )
-          
-          declare -a KERNELS_TO_FETCH_SUSFS
-          if [[ "${{ inputs.kernels_to_build }}" == "all" ]]; then
-            for key in "${!BRANCH_MAP[@]}"; do
-              KERNELS_TO_FETCH_SUSFS+=("$key")
+            GITLAB_OWNER="simonpunk"
+            GITLAB_REPO="susfs4ksu"
+            
+            declare -A BRANCH_MAP=(
+              ["a12-5.10"]="gki-android12-5.10"
+              ["a13-5.10"]="gki-android13-5.10"
+              ["a13-5.15"]="gki-android13-5.15"
+              ["a14-5.15"]="gki-android14-5.15"
+              ["a14-6.1"]="gki-android14-6.1"
+              ["a15-6.6"]="gki-android15-6.6"
+            )
+            
+            declare -a KERNELS_TO_FETCH_SUSFS
+            if [[ "${{ inputs.kernels_to_build }}" == "all" ]]; then
+              for key in "${!BRANCH_MAP[@]}"; do
+                KERNELS_TO_FETCH_SUSFS+=("$key")
+              done
+            else
+              IFS=',' read -r -a INPUT_KERNELS <<< "${{ inputs.kernels_to_build }}"
+              for kernel_input in "${INPUT_KERNELS[@]}"; do
+                case "$kernel_input" in
+                  "a12")
+                    KERNELS_TO_FETCH_SUSFS+=("a12-5.10")
+                    ;;
+                  "a13")
+                    KERNELS_TO_FETCH_SUSFS+=("a13-5.10" "a13-5.15")
+                    ;;
+                  "a14")
+                    KERNELS_TO_FETCH_SUSFS+=("a14-5.15" "a14-6.1")
+                    ;;
+                  "a15")
+                    KERNELS_TO_FETCH_SUSFS+=("a15-6.6")
+                    ;;
+                  *)
+                    if [[ -n "${BRANCH_MAP[$kernel_input]}" ]]; then
+                      KERNELS_TO_FETCH_SUSFS+=("$kernel_input")
+                    else
+                      echo "Warning: Input kernel '$kernel_input' does not have a defined SUSFS branch mapping. Skipping." >&2
+                    fi
+                    ;;
+                esac
+              done
+            fi
+
+            mapfile -t SORTED_KERNELS < <(printf '%s\n' "${KERNELS_TO_FETCH_SUSFS[@]}" | sort)
+            KERNELS_TO_FETCH_SUSFS=("${SORTED_KERNELS[@]}")
+            
+            for kernel_id in "${KERNELS_TO_FETCH_SUSFS[@]}"; do
+              susfs_branch_name="${BRANCH_MAP[$kernel_id]}"
+              if [[ -n "$susfs_branch_name" ]]; then
+                SUSFS_COMMIT_HASH=$(git ls-remote "https://gitlab.com/$GITLAB_OWNER/$GITLAB_REPO.git" "refs/heads/$susfs_branch_name" | awk '{ print $1 }')
+                SUSFS_COMMIT_HASH="${SUSFS_COMMIT_HASH:-UNKNOWN_COMMIT}"
+                SUSFS_COMMIT_URL="https://gitlab.com/$GITLAB_OWNER/$GITLAB_REPO/-/commit/$SUSFS_COMMIT_HASH"
+                FINAL_RELEASE_NOTES+="\n - ${kernel_id}: [${SUSFS_COMMIT_HASH}](${SUSFS_COMMIT_URL})"
+              else
+                echo "Warning: SUSFS branch name not found for kernel ID: $kernel_id. Cannot fetch commit info." >&2
+              fi
             done
           else
-            IFS=',' read -r -a INPUT_KERNELS <<< "${{ inputs.kernels_to_build }}"
-            for kernel_input in "${INPUT_KERNELS[@]}"; do
-              case "$kernel_input" in
-                "a12")
-                  KERNELS_TO_FETCH_SUSFS+=("a12-5.10")
-                  ;;
-                "a13")
-                  KERNELS_TO_FETCH_SUSFS+=("a13-5.10" "a13-5.15")
-                  ;;
-                "a14")
-                  KERNELS_TO_FETCH_SUSFS+=("a14-5.15" "a14-6.1")
-                  ;;
-                "a15")
-                  KERNELS_TO_FETCH_SUSFS+=("a15-6.6")
-                  ;;
-                *)
-                  if [[ -n "${BRANCH_MAP[$kernel_input]}" ]]; then
-                    KERNELS_TO_FETCH_SUSFS+=("$kernel_input")
-                  else
-                    echo "Warning: Input kernel '$kernel_input' does not have a defined SUSFS branch mapping. Skipping." >&2
-                  fi
-                  ;;
-              esac
-            done
+            FINAL_RELEASE_NOTES+="\n- **SUSFS**: Disabled (Manual Hook Mode)"
           fi
-
-          mapfile -t SORTED_KERNELS < <(printf '%s\n' "${KERNELS_TO_FETCH_SUSFS[@]}" | sort)
-          KERNELS_TO_FETCH_SUSFS=("${SORTED_KERNELS[@]}")
-          
-          for kernel_id in "${KERNELS_TO_FETCH_SUSFS[@]}"; do
-            susfs_branch_name="${BRANCH_MAP[$kernel_id]}"
-            if [[ -n "$susfs_branch_name" ]]; then
-              SUSFS_COMMIT_HASH=$(git ls-remote "https://gitlab.com/$GITLAB_OWNER/$GITLAB_REPO.git" "refs/heads/$susfs_branch_name" | awk '{ print $1 }')
-              SUSFS_COMMIT_HASH="${SUSFS_COMMIT_HASH:-UNKNOWN_COMMIT}"
-              SUSFS_COMMIT_URL="https://gitlab.com/$GITLAB_OWNER/$GITLAB_REPO/-/commit/$SUSFS_COMMIT_HASH"
-              FINAL_RELEASE_NOTES+="\n - ${kernel_id}: [${SUSFS_COMMIT_HASH}](${SUSFS_COMMIT_URL})"
-            else
-              echo "Warning: SUSFS branch name not found for kernel ID: $kernel_id. Cannot fetch commit info." >&2
-            fi
-          done
           
           FINAL_RELEASE_NOTES+="\n\n</details>"
           
