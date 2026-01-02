@@ -372,12 +372,20 @@ jobs:
           # 移除 check_defconfig
           sudo sed -i 's/check_defconfig//' ./common/build.config.gki
 
-      - name: 写入内核名称
+      - name: 配置内核名称和构建时间
         run: |
-          cd kernel_workspace
+          cd kernel_workspace/common
           echo "内核名称: $KERNEL_NAME"
-          # 替换 setlocalversion 中的版本输出
-          sed -i 's/${scm_version}//' ./common/scripts/setlocalversion
+          echo "构建时间: $KERNEL_TIME"
+          
+          # 设置构建时间 (5系方式 - 设置 UTS_VERSION)
+          perl -pi -e "s{UTS_VERSION=\"\\\$\\(echo \\\$UTS_VERSION \\\$CONFIG_FLAGS \\\$TIMESTAMP \\| cut -b -\\\$UTS_LEN\\)\"}{UTS_VERSION=\"#1 SMP PREEMPT $KERNEL_TIME\"}" ./scripts/mkcompile_h
+          
+          # 设置内核版本名称 - 直接替换 setlocalversion 的输出
+          perl -0777 -pi -e 's/\(echo "\$\{KERNELVERSION\}\$\{file_localversion\}\$\{config_localversion\}\$\{LOCALVERSION\}\$\{scm_version\}"\)/echo "'"$KERNEL_NAME"'"/s' ./scripts/setlocalversion
+          
+          # 去除 -dirty 后缀
+          sed -i 's/-dirty//' ./scripts/setlocalversion
 
       - name: 构建内核
         run: |
