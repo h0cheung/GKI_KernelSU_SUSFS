@@ -377,7 +377,7 @@ jobs:
           cd kernel_workspace
           echo "内核名称: $KERNEL_NAME"
           # 替换 setlocalversion 中的版本输出
-          sed -i 's/${scm_version}//' ./common/scripts/setlocalversion
+          sed -i "s/echo ...KERNELVERSION...file_localversion...config_localversion...LOCALVERSION...scm_version.*/echo ${KERNEL_NAME}/" ./common/scripts/setlocalversion
 
       - name: 构建内核
         run: |
@@ -430,6 +430,7 @@ jobs:
 
           chmod +x cc-wrapper ld-wrapper
 
+          export KBUILD_BUILD_VERSION="1"
           export KBUILD_BUILD_TIMESTAMP="${KERNEL_TIME}"
 
           # 清理空间
