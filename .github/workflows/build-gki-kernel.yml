@@ -23,7 +23,7 @@ on:
         description: '是否创建 GitHub Release?'
         required: true
         type: boolean
-        default: false
+        default: true
       kernelsu_variant:
         description: "选择 KernelSU"
         required: true
@@ -51,7 +51,7 @@ on:
         description: '是否启用 HymoFS 混合挂载?'
         required: true
         type: boolean
-        default: true
+        default: false
       use_zram:
         description: '是否开启 lz4kd & lz4k_oplus 算法?'
         required: true
@@ -75,6 +75,9 @@ jobs:
               echo "KERNEL_NAME=6.6.56-android15-8-g38447e018c92-ab12829524-4k" >> $GITHUB_ENV
               echo "KERNEL_TIME=Thu Dec 19 17:58:46 UTC 2024" >> $GITHUB_ENV
               echo "releases=TB322FC_1.1.11.120" >> $GITHUB_ENV
+              echo "AVB_ROLLBACK_INDEX=1738713600" >> $GITHUB_ENV
+              echo "AVB_FINGERPRINT=Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.10.043_250510_PRC:user/release-keys" >> $GITHUB_ENV
+              echo "AVB_SECURITY_PATCH=2025-02-05" >> $GITHUB_ENV
               ;;
             89)
               echo "sub_level=6.6.89" >> $GITHUB_ENV
@@ -82,6 +85,9 @@ jobs:
               echo "KERNEL_NAME=6.6.89-android15-8-g14220ae4ce65-ab13680582-4k" >> $GITHUB_ENV
               echo "KERNEL_TIME=Mon Jun 23 07:30:57 UTC 2025" >> $GITHUB_ENV
               echo "releases=TB322FC_1.1.11.263" >> $GITHUB_ENV
+              echo "AVB_ROLLBACK_INDEX=1757364229" >> $GITHUB_ENV
+              echo "AVB_FINGERPRINT=Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.11.263_251105_PRC:user/release-keys" >> $GITHUB_ENV
+              echo "AVB_SECURITY_PATCH=2025-02-05" >> $GITHUB_ENV
               ;;
             最新)
               echo "sub_level=6.6.lts" >> $GITHUB_ENV
@@ -89,6 +95,9 @@ jobs:
               echo "KERNEL_NAME=6.6.89-android15-8-g14220ae4ce65-ab13680582-4k" >> $GITHUB_ENV
               echo "KERNEL_TIME=Mon Jun 23 07:30:57 UTC 2025" >> $GITHUB_ENV
               echo "releases=TB322FC_1.1.11.263" >> $GITHUB_ENV
+              echo "AVB_ROLLBACK_INDEX=1757364229" >> $GITHUB_ENV
+              echo "AVB_FINGERPRINT=Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.11.263_251105_PRC:user/release-keys" >> $GITHUB_ENV
+              echo "AVB_SECURITY_PATCH=2025-02-05" >> $GITHUB_ENV
               ;;
           esac
 
@@ -461,33 +470,41 @@ jobs:
           name: kernel_${{ inputs.kernelsu_variant }}_${{ env.sub_level }}
           path: kernel_workspace/common/out/arch/arm64/boot/kernel
 
-      - name: 使用自定义密钥签名 boot
+      - name: 创建并签名 boot.img
         env:
           BOOT_SIGN_KEY: ${{ secrets.BOOT_SIGN_KEY }}
         run: |
           cd kernel_workspace
-          aria2c -s16 -x16 -k1M "https://github.com/showdo/AOSP-Testkey-BootSigner/archive/refs/heads/main.tar.gz" -o boot_avb_tool.tar.gz && \
-          mkdir -p boot_avb_tool && \
-          tar -xzf boot_avb_tool.tar.gz -C boot_avb_tool && \
-          rm -f boot_avb_tool.tar.gz && \
-          cp ./common/out/arch/arm64/boot/Image ./boot_avb_tool/AOSP-Testkey-BootSigner-main/kernel
-          cd boot_avb_tool/AOSP-Testkey-BootSigner-main && \
-          curl -L -o boot.img https://github.com/showdo/AOSP-Testkey-BootSigner/releases/download/${{ env.releases }}/boot.img
+
+          # 下载 AOSP 工具链
+          AOSP_MIRROR=https://android.googlesource.com
+          BRANCH=main-kernel-build-2024
+          git clone $AOSP_MIRROR/kernel/prebuilts/build-tools -b $BRANCH --depth 1 kernel-build-tools
+          git clone $AOSP_MIRROR/platform/system/tools/mkbootimg -b $BRANCH --depth 1 mkbootimg
+
+          AVBTOOL=$GITHUB_WORKSPACE/kernel_workspace/kernel-build-tools/linux-x86/bin/avbtool
+          MKBOOTIMG=$GITHUB_WORKSPACE/kernel_workspace/mkbootimg/mkbootimg.py
+          BOOT_SIGN_KEY_PATH=$GITHUB_WORKSPACE/kernel_workspace/kernel-build-tools/linux-x86/share/avb/testkey_rsa4096.pem
 
           # 使用自定义密钥
-          echo "$BOOT_SIGN_KEY" > custom_key.pem
+          echo "$BOOT_SIGN_KEY" > $BOOT_SIGN_KEY_PATH
 
-          chmod +x ./tools/magiskboot
-          ./tools/magiskboot repack boot.img
-          rm -f ./boot.img kernel
-          mv ./new-boot.img ./boot.img
-          python3 rebuild_avb.py --chained-mode --key custom_key.pem
+          # 复制 Image 文件
+          cp ./common/out/arch/arm64/boot/Image ./Image
+
+          echo "Building boot.img"
+          $MKBOOTIMG --header_version 4 --kernel Image --output boot.img
+          $AVBTOOL add_hash_footer --partition_name boot --partition_size $((96 * 1024 * 1024)) --image boot.img --algorithm SHA256_RSA4096 --key $BOOT_SIGN_KEY_PATH --rollback_index ${{ env.AVB_ROLLBACK_INDEX }} --prop 'com.android.build.boot.os_version:15' --prop 'com.android.build.boot.fingerprint:${{ env.AVB_FINGERPRINT }}' --prop 'com.android.build.boot.security_patch:${{ env.AVB_SECURITY_PATCH }}'
+
+          # 重命名为有意义的文件名
+          mv boot.img android15-${{ env.sub_level }}-boot.img
+          rm Image
 
       - name: 上传已签名的 boot
         uses: actions/upload-artifact@v4
         with:
           name: Boot_${{ env.KSUVER }}_${{ env.sub_level }}_${{ inputs.kernelsu_variant }}_Signed
-          path: kernel_workspace/boot_avb_tool/AOSP-Testkey-BootSigner-main/boot.img
+          path: kernel_workspace/android15-${{ env.sub_level }}-boot.img
 
   create-release:
     needs: build
