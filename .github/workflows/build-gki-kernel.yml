@@ -178,6 +178,11 @@ jobs:
           ccache -o compression=true
           echo "ccache初始状态:"
           ccache -s
+ 
+      - name: 应用手柄补丁
+        run: |
+          cd kernel_workspace/common
+          cp $GITHUB_WORKSPACE/patches/xpad.c drivers/input/joystick/xpad.c
 
       - name: 配置 BBG 基带守护
         if: ${{ inputs.BBG }}
