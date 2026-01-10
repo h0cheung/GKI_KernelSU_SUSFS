@@ -826,12 +826,14 @@ struct usb_xpad {
 	time64_t mode_btn_down_ts;
 	struct urb *ghl_urb;		/* URB for GHL Xbox One magic data */
 	struct timer_list ghl_poke_timer;	/* Timer for periodic poke of GHL magic data */
+	struct timer_list kp40_timer;	/* Timer for Beitong KP40 heartbeat */
 };
 
 static int xpad_init_input(struct usb_xpad *xpad);
 static void xpad_deinit_input(struct usb_xpad *xpad);
 static void xpadone_ack_mode_report(struct usb_xpad *xpad, u8 seq_num);
 static void xpad360w_poweroff_controller(struct usb_xpad *xpad);
+static int xpad_try_sending_next_out_packet(struct usb_xpad *xpad);
 
 /*
  *	ghl_magic_poke_cb
@@ -861,6 +863,38 @@ static void ghl_magic_poke(struct timer_list *t)
 	ret = usb_submit_urb(xpad->ghl_urb, GFP_ATOMIC);
 	if (ret < 0)
 		pr_warn("URB transfer failed.\n");
+}
+
+/*
+ *	kp40_heartbeat_timer_func
+ *
+ *	Periodic heartbeat (LED command) for Beitong KP40 to prevent disconnection.
+ */
+static void kp40_heartbeat_timer_func(struct timer_list *t)
+{
+	struct usb_xpad *xpad = from_timer(xpad, t, kp40_timer);
+	struct xpad_output_packet *packet =
+			&xpad->out_packets[XPAD_OUT_CMD_IDX];
+	unsigned long flags;
+
+	spin_lock_irqsave(&xpad->odata_lock, flags);
+
+	/* Only send if no other command is pending to avoid conflict */
+	if (!packet->pending) {
+		packet->data[0] = 0x01;
+		packet->data[1] = 0x03;
+		packet->data[2] = 0x02; /* LED 2 */
+		packet->len = 3;
+		packet->pending = true;
+		
+		/* Reset sequence and try sending */
+		xpad->last_out_packet = -1;
+		xpad_try_sending_next_out_packet(xpad);
+	}
+
+	spin_unlock_irqrestore(&xpad->odata_lock, flags);
+
+	mod_timer(&xpad->kp40_timer, jiffies + msecs_to_jiffies(200));
 }
 
 /*
@@ -2043,8 +2077,22 @@ static int xpad_start_input(struct usb_xpad *xpad)
 			return error;
 	}
 
-	if (usb_submit_urb(xpad->irq_in, GFP_KERNEL))
-		return -EIO;
+	error = usb_submit_urb(xpad->irq_in, GFP_KERNEL);
+	if (error) {
+		/* 
+		 * Beitong KP40 might have forced polling in probe.
+		 * Accept -EBUSY as success.
+		 */
+		bool is_beitong = (xpad->udev->manufacturer &&
+				   strcasecmp("beitong", xpad->udev->manufacturer) == 0) ||
+				  (xpad->udev->product &&
+				   strncasecmp("BTP-", xpad->udev->product, 4) == 0);
+
+		if (error == -EBUSY && is_beitong)
+			error = 0;
+		else
+			return -EIO;
+	}
 
 	if (xpad->xtype == XTYPE_XBOXONE) {
 		error = xpad_start_xbox_one(xpad);
@@ -2073,19 +2121,9 @@ static int xpad_start_input(struct usb_xpad *xpad)
 			dev_warn(&xpad->dev->dev,
 				 "unable to receive magic message: %d\n",
 				 error);
-
-		/*
-		 * Some Beitong controllers require init packets
-		 * to be sent via interrupt out endpoint to stay connected.
-		 * These packets are: LED command (01 03 02) and mode init (02 08 03).
-		 * Detect Beitong by manufacturer name or product name prefix "BTP-".
-		 */
-		bool is_beitong = (xpad->udev->manufacturer &&
-				   strcasecmp("beitong", xpad->udev->manufacturer) == 0) ||
-				  (xpad->udev->product &&
-				   strncasecmp("BTP-", xpad->udev->product, 4) == 0);
-
 	}
+
+	return 0;
 
 	return 0;
 }
@@ -2341,35 +2379,34 @@ err_free_input:
 
 static void xpad_beitong_early_init(struct usb_device *udev)
 {
-	char *data = kzalloc(20, GFP_KERNEL);
-	int actual_length;
+	struct usb_host_interface *iface;
+	
+	/* 1. Send Interrupt OUT packets (LED & Mode) - Critical for Beitong */
+	/* 01 03 02: LED 2 (Combined) */
+	u8 cmd_led[] = {0x01, 0x03, 0x02};
+	/* 02 08 03: Mode (Xinput) */
+	u8 cmd_mode[] = {0x02, 0x08, 0x03};
 
-	if (!data)
-		return;
+	int ret, transferred;
 
-	/* 
-	 * Send Beitong Interrupt Packets (LED & Mode) -> Endpoint 0x02 OUT.
-	 * Based on Wireshark capture of Beitong KP40.
-	 * Note: Interrupt packets appear BEFORE control messages in capture.
-	 */
-	data[0] = 0x01; data[1] = 0x03; data[2] = 0x02;
-	usb_interrupt_msg(udev, usb_sndintpipe(udev, 0x02), data, 3, &actual_length, 100);
+	/* Find interrupt OUT endpoint (Ep 0x02) on Interface 0 */
+	/* We assume Interface 0, AltByte 0. */
+	/* Using usb_interrupt_msg to Endpoint 0x02 directly. */
+	
+	ret = usb_interrupt_msg(udev, usb_sndintpipe(udev, 0x02), 
+				cmd_led, sizeof(cmd_led), &transferred, 100);
+	if (ret < 0)
+		dev_warn(&udev->dev, "beitong_early: LED cmd failed: %d\n", ret);
 
-	mdelay(2);
+	/* Small delay between packets */
+	usleep_range(2000, 3000);
 
-	data[0] = 0x02; data[1] = 0x08; data[2] = 0x03;
-	usb_interrupt_msg(udev, usb_sndintpipe(udev, 0x02), data, 3, &actual_length, 100);
-
-	/* Send Shanwan/Beitong Control Messages */
-	usb_control_msg(udev, usb_rcvctrlpipe(udev, 0), 0x01, 0xc1,
-			0x100, 0x00, data, 20, 100);
-	usb_control_msg(udev, usb_rcvctrlpipe(udev, 0), 0x01, 0xc1,
-			0x00, 0x00, data, 8, 100);
-	usb_control_msg(udev, usb_rcvctrlpipe(udev, 0), 0x01, 0xc0,
-			0x00, 0x00, data, 4, 100);
-
-	kfree(data);
+	ret = usb_interrupt_msg(udev, usb_sndintpipe(udev, 0x02), 
+				cmd_mode, sizeof(cmd_mode), &transferred, 100);
+	if (ret < 0)
+		dev_warn(&udev->dev, "beitong_early: Mode cmd failed: %d\n", ret);
 }
+
 
 static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id)
 {
@@ -2557,6 +2594,23 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 		timer_setup(&xpad->ghl_poke_timer, ghl_magic_poke, 0);
 		mod_timer(&xpad->ghl_poke_timer, jiffies + GHL_GUITAR_POKE_INTERVAL*HZ);
 	}
+
+	/* 
+	 * BEITONG KP40 requires immediate input polling after initialization
+	 * to stay connected. If not polled, it resets after ~1 second.
+	 */
+	if (is_beitong) {
+		error = usb_submit_urb(xpad->irq_in, GFP_KERNEL);
+		if (error)
+			dev_err(&intf->dev, "kp40: force polling failed: %d\n", error);
+		else
+			dev_info(&intf->dev, "kp40: force polling started\n");
+
+		/* Start heartbeat timer to keep connection alive */
+		timer_setup(&xpad->kp40_timer, kp40_heartbeat_timer_func, 0);
+		mod_timer(&xpad->kp40_timer, jiffies + msecs_to_jiffies(200));
+	}
+
 	return 0;
 
 err_deinit_output:
@@ -2592,6 +2646,13 @@ static void xpad_disconnect(struct usb_interface *intf)
 	if (xpad->quirks & QUIRK_GHL_XBOXONE) {
 		usb_free_urb(xpad->ghl_urb);
 		timer_delete_sync(&xpad->ghl_poke_timer);
+	}
+
+	if ((xpad->udev->manufacturer &&
+	     strcasecmp("beitong", xpad->udev->manufacturer) == 0) ||
+	    (xpad->udev->product &&
+	     strncasecmp("BTP-", xpad->udev->product, 4) == 0)) {
+		timer_delete_sync(&xpad->kp40_timer);
 	}
 
 	usb_free_coherent(xpad->udev, XPAD_PKT_LEN,
