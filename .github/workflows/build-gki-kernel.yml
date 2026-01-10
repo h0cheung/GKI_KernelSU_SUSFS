@@ -18,7 +18,7 @@ on:
           - '56'
           - '89'
           - '最新'
-        default: '56'
+        default: '89'
       make_release:
         description: '是否创建 GitHub Release?'
         required: true
@@ -31,7 +31,7 @@ on:
         options:
           - SukiSU
           - ReSukiSU
-        default: ReSukiSU
+        default: SukiSU
       use_kpm:
         description: '是否开启KPM功能?'
         required: false
