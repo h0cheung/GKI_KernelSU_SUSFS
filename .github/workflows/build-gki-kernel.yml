@@ -183,6 +183,10 @@ jobs:
         run: |
           cd kernel_workspace/common
           cp $GITHUB_WORKSPACE/patches/xpad.c drivers/input/joystick/xpad.c
+          echo "CONFIG_INPUT_FF_MEMLESS=y" >> ./arch/arm64/configs/gki_defconfig
+          echo "CONFIG_JOYSTICK_XPAD=y" >> ./arch/arm64/configs/gki_defconfig
+          echo "CONFIG_JOYSTICK_XPAD_FF=y" >> ./arch/arm64/configs/gki_defconfig
+          echo "CONFIG_JOYSTICK_XPAD_LEDS=y" >> ./arch/arm64/configs/gki_defconfig
 
       - name: 配置 BBG 基带守护
         if: ${{ inputs.BBG }}
