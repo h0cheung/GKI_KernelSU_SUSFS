@@ -1,0 +1,1224 @@
+[ 1474.756612] [    T1] init: starting service 'vendor.qvirtservice_rs'...
+[ 1474.758286] [    T1] init: ... started service 'vendor.qvirtservice_rs' has pid 16910
+[ 1474.760747] [    T1] init: Service 'vendor.qvirtservice_rs' (pid 16910) exited with status 1
+[ 1474.760753] [    T1] init: Sending signal 9 to service 'vendor.qvirtservice_rs' (pid 16910) process group...
+[ 1474.760832] [    T1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_0/pid_16910
+[ 1474.760839] [    T1] init: process with updatable components 'vendor.qvirtservice_rs' exited 4 times in 4 minutes
+[ 1474.761057] [    T1] init: processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+[ 1474.761112] [    T1] init: starting service 'exec 296 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+[ 1474.762072] [    T1] init: ... started service 'exec 296 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 16911
+[ 1474.762079] [    T1] init: SVC_EXEC service 'exec 296 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 16911 (uid 1000 gid 1000+0 context default) started; waiting...
+[ 1475.401229] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3793: Notification type:4, early_trigger:1
+[ 1475.401235] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3817: Received fps change old fps:60 new fps:120
+[ 1475.402429] [ T1150] [drm:dsi_display_set_mode [msm_drm]] [msm-dsi-info]: mdp_transfer_time=0, hactive=1904, vactive=3040, fps=120, clk_rate=758650000
+[ 1475.410284] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3793: Notification type:4, early_trigger:0
+[ 1475.410286] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3817: Received fps change old fps:60 new fps:120
+[ 1476.330482] [T13766] lenovo_sys_temp soc:sys_temp_support: temperature model V=3 prod=1 front_temp=36177 back_temp=35448 user_temp=37046 user_front=37046 user_backleft=32817 user_backright=32975
+[ 1476.330490] [T13766] lenovo_sys_temp soc:sys_temp_support: [Thermal] quiet-therm temp: 34320
+[ 1476.330491] [T13766] lenovo_sys_temp soc:sys_temp_support: [Thermal] lcm-thermal temp: 35645
+[ 1477.346913] [T14117] BATTERY_CHG: lenovo_chg_monitor_work: TYPE = [Unknown,4,9], VBUS = [1164000,39000], USB_TEMP = [339,345], BATT_TEMP = 327, GPIO:[0,0]
+[ 1477.368868] [ T2460] android time 2026-01-10 15:15:50.720696520
+[ 1477.671554] [ T1687] [haptic_hv]<right>input_upload_effect: FF_PERIODIC waveform id = 1, wav_id_max = 167, gain = 0x80
+[ 1477.671576] [   T11] [haptic_hv]<right>input_vib_work_routine: aw_haptic->activate_mode: 1
+[ 1477.671579] [   T11] [haptic_hv]<right>aw8693x_stop: enter
+[ 1477.671582] [ T1687] [haptic_hv]<left>input_upload_effect: FF_PERIODIC waveform id = 1, wav_id_max = 167, gain = 0x80
+[ 1477.671619] [T13649] [haptic_hv]<left>input_vib_work_routine: aw_haptic->activate_mode: 1
+[ 1477.671621] [T13649] [haptic_hv]<left>aw8693x_stop: enter
+[ 1477.672716] [   T11] [haptic_hv]<right>aw8693x_wait_enter_standby: entered standby!
+[ 1477.672718] [   T11] [haptic_hv]<right>aw8693x_upload_lra: write f0_cali_data to trim_lra = 0x00
+[ 1477.672837] [T13649] [haptic_hv]<left>aw8693x_wait_enter_standby: entered standby!
+[ 1477.672838] [T13649] [haptic_hv]<left>aw8693x_upload_lra: write f0_cali_data to trim_lra = 0x00
+[ 1477.673072] [   T11] [haptic_hv]<right>ram_vbat_comp: ram vbat comp close
+[ 1477.673165] [T13649] [haptic_hv]<left>ram_vbat_comp: ram vbat comp close
+[ 1477.674186] [   T11] [haptic_hv]<right>aw8693x_play_mode: enter ram mode
+[ 1477.674271] [T13649] [haptic_hv]<left>aw8693x_play_mode: enter ram mode
+[ 1477.674980] [   T11] [haptic_hv]<right>aw8693x_bst_mode_config: haptic bst mode = bst
+[ 1477.675064] [T13649] [haptic_hv]<left>aw8693x_bst_mode_config: haptic bst mode = bst
+[ 1477.675783] [   T11] [haptic_hv]<right>aw8693x_play_go: start haptic notify, duration = 0!
+
+[ 1477.675785] [   T11] [haptic_hv]<right>aw8693x_play_go: enter, flag = 1
+[ 1477.675858] [T13649] [haptic_hv]<left>aw8693x_play_go: start haptic notify, duration = 0!
+
+[ 1477.675859] [T13649] [haptic_hv]<left>aw8693x_play_go: enter, flag = 1
+[ 1477.771975] [   T11] [haptic_hv]<right>aw8693x_stop: enter
+[ 1477.771983] [T13649] [haptic_hv]<left>aw8693x_stop: enter
+[ 1477.772791] [   T11] [haptic_hv]<right>aw8693x_wait_enter_standby: entered standby!
+[ 1477.772794] [   T11] [haptic_hv]<right>aw8693x_stop: stop haptic notify!
+[ 1477.772902] [T13649] [haptic_hv]<left>aw8693x_wait_enter_standby: entered standby!
+[ 1477.772903] [T13649] [haptic_hv]<left>aw8693x_stop: stop haptic notify!
+[ 1478.729810] [ T1687] [haptic_hv]<right>input_upload_effect: FF_PERIODIC waveform id = 1, wav_id_max = 167, gain = 0x80
+[ 1478.729829] [   T11] [haptic_hv]<right>input_vib_work_routine: aw_haptic->activate_mode: 1
+[ 1478.729831] [ T1687] [haptic_hv]<left>input_upload_effect: FF_PERIODIC waveform id = 1, wav_id_max = 167, gain = 0x80
+[ 1478.729832] [   T11] [haptic_hv]<right>aw8693x_stop: enter
+[ 1478.729841] [T13649] [haptic_hv]<left>input_vib_work_routine: aw_haptic->activate_mode: 1
+[ 1478.729843] [T13649] [haptic_hv]<left>aw8693x_stop: enter
+[ 1478.730864] [   T11] [haptic_hv]<right>aw8693x_wait_enter_standby: entered standby!
+[ 1478.730867] [   T11] [haptic_hv]<right>aw8693x_upload_lra: write f0_cali_data to trim_lra = 0x00
+[ 1478.730989] [T13649] [haptic_hv]<left>aw8693x_wait_enter_standby: entered standby!
+[ 1478.730990] [T13649] [haptic_hv]<left>aw8693x_upload_lra: write f0_cali_data to trim_lra = 0x00
+[ 1478.731229] [   T11] [haptic_hv]<right>ram_vbat_comp: ram vbat comp close
+[ 1478.731316] [T13649] [haptic_hv]<left>ram_vbat_comp: ram vbat comp close
+[ 1478.732405] [   T11] [haptic_hv]<right>aw8693x_play_mode: enter ram mode
+[ 1478.732494] [T13649] [haptic_hv]<left>aw8693x_play_mode: enter ram mode
+[ 1478.733245] [   T11] [haptic_hv]<right>aw8693x_bst_mode_config: haptic bst mode = bst
+[ 1478.733351] [T13649] [haptic_hv]<left>aw8693x_bst_mode_config: haptic bst mode = bst
+[ 1478.734156] [   T11] [haptic_hv]<right>aw8693x_play_go: start haptic notify, duration = 0!
+
+[ 1478.734158] [   T11] [haptic_hv]<right>aw8693x_play_go: enter, flag = 1
+[ 1478.734239] [T13649] [haptic_hv]<left>aw8693x_play_go: start haptic notify, duration = 0!
+
+[ 1478.734240] [T13649] [haptic_hv]<left>aw8693x_play_go: enter, flag = 1
+[ 1478.801830] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3793: Notification type:4, early_trigger:1
+[ 1478.801836] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3817: Received fps change old fps:120 new fps:60
+[ 1478.803106] [ T1150] [drm:dsi_display_set_mode [msm_drm]] [msm-dsi-info]: mdp_transfer_time=0, hactive=1904, vactive=3040, fps=60, clk_rate=758650000
+[ 1478.810181] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3793: Notification type:4, early_trigger:0
+[ 1478.810185] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3817: Received fps change old fps:120 new fps:60
+[ 1478.830179] [   T11] [haptic_hv]<right>aw8693x_stop: enter
+[ 1478.830191] [T13649] [haptic_hv]<left>aw8693x_stop: enter
+[ 1478.830973] [   T11] [haptic_hv]<right>aw8693x_wait_enter_standby: entered standby!
+[ 1478.830977] [   T11] [haptic_hv]<right>aw8693x_stop: stop haptic notify!
+[ 1478.831091] [T13649] [haptic_hv]<left>aw8693x_wait_enter_standby: entered standby!
+[ 1478.831093] [T13649] [haptic_hv]<left>aw8693x_stop: stop haptic notify!
+[ 1479.766428] [    T1] init: ... started service 'vendor.qvirtservice_rs' has pid 16933
+[ 1479.774644] [    T1] init: Service 'vendor.qvirtservice_rs' (pid 16933) exited with status 1
+[ 1479.774662] [    T1] init: Sending signal 9 to service 'vendor.qvirtservice_rs' (pid 16933) process group...
+[ 1479.774904] [    T1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_0/pid_16933
+[ 1479.774924] [    T1] init: process with updatable components 'vendor.qvirtservice_rs' exited 4 times in 4 minutes
+[ 1479.775580] [    T1] init: processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+[ 1479.775757] [    T1] init: starting service 'exec 297 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+[ 1479.778806] [    T1] init: ... started service 'exec 297 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 16934
+[ 1479.778837] [    T1] init: SVC_EXEC service 'exec 297 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 16934 (uid 1000 gid 1000+0 context default) started; waiting...
+[ 1479.792568] [    T1] init: Service 'exec 297 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 16934) exited with status 0 waiting took 0.014000 seconds
+[ 1481.451702] [T13766] lenovo_sys_temp soc:sys_temp_support: temperature model V=3 prod=1 front_temp=36200 back_temp=35610 user_temp=37060 user_front=37060 user_backleft=32885 user_backright=33010
+[ 1481.451725] [T13766] lenovo_sys_temp soc:sys_temp_support: [Thermal] quiet-therm temp: 34515
+[ 1481.451732] [T13766] lenovo_sys_temp soc:sys_temp_support: [Thermal] lcm-thermal temp: 35744
+[ 1482.466911] [T14117] BATTERY_CHG: lenovo_chg_monitor_work: TYPE = [Unknown,4,9], VBUS = [1164000,39000], USB_TEMP = [341,345], BATT_TEMP = 327, GPIO:[0,0]
+[ 1483.145859] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 156
+[ 1483.161850] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 170
+[ 1483.178662] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 184
+[ 1483.195459] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 197
+[ 1483.212148] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 211
+[ 1483.228806] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 224
+[ 1483.245167] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 238
+[ 1483.262329] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 252
+[ 1483.278611] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 265
+[ 1483.295337] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 279
+[ 1483.311959] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 293
+[ 1483.328218] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 306
+[ 1483.344908] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 320
+[ 1483.346771] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 40 d9 05 01 4b 72 01 48 f8 00 00
+[ 1483.346777] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1483.361564] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 333
+[ 1483.378673] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 347
+[ 1483.395287] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 355
+[ 1483.545395] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 63 d9 05 01 4b 72 01 48 f8 00 00
+[ 1483.545407] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1484.622089] [   T11] UCSI: handle_ucsi_read_ack: [LENOVO_UCSI] port_num = 1, change = 0x5804, flag = 0x403D, partner_type = 2, usb = 1, opmode = 5, dev_type = 0, c1_data = 1, c2_data = 0, gpio = 0
+[ 1484.632527] [   T11] UCSI: handle_ucsi_read_ack: [LENOVO_UCSI] port_num = 1, change = 0x5804, flag = 0x403D, partner_type = 2, usb = 1, opmode = 5, dev_type = 0, c1_data = 1, c2_data = 0, gpio = 0
+[ 1484.632952] [T13766] [LENOVO_UCSI] cur_role = NONE, new_role = HOST, present = [1 0]
+[ 1484.632965] [T13766] [LENOVO_UCSI] dwc3_msm_set_role: kobject_uevent_env+++uen2:usbc1c2
+[ 1484.633069] [T13766] [LENOVO_UCSI] cur_role = HOST, new_role = HOST, present = [1 0]
+[ 1484.633102] [T13766] [LENOVO_UCSI] dwc3_msm_set_role: kobject_uevent_env+++uen2:usbc1c2
+[ 1484.637562] [   T11] msm-dwc3 a600000.ssusb: DWC3 exited from low power mode
+[ 1484.639056] [ T1638] healthd: battery l=34 v=3803 t=32.7 h=2 st=3 c=450000 fc=7509000 cc=44 chg=
+[ 1484.639725] [T14117] eusb2-repeater-nxp 1-004f: eUSB2 repeater version = 0xa2 ur->flags:0x1, C1_d_present:1, C2_d_present:0
+[ 1484.639728] [T14117] eusb2-repeater-nxp 1-004f: write C1 sequence
+[ 1484.639729] [T14117] eusb2-repeater-nxp 1-004f: write C1 sequence from reg save value
+[ 1484.641987] [T14117] eusb2-repeater-nxp 1-004f: eUSB2 repeater init
+[ 1484.692486] [T14117] dwc3 a600000.dwc3: Set IRQ thread:irq/290-dwc3 pid:15841 to SCHED_NORMAL prio
+[ 1484.696206] [T14117] dwc3 a600000.dwc3: request 0000000000000000 was not queued to ep0out
+[ 1484.698667] [T14117] xhci-hcd xhci-hcd.1.auto: xHCI Host Controller
+[ 1484.698990] [T14117] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 1
+[ 1484.701457] [T14117] xhci-hcd xhci-hcd.1.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x0000808000000010
+[ 1484.701489] [T14117] xhci-hcd xhci-hcd.1.auto: irq 290, io mem 0x0a600000
+[ 1484.701577] [T14117] xhci-hcd xhci-hcd.1.auto: xHCI Host Controller
+[ 1484.701702] [T14117] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 2
+[ 1484.701705] [T14117] xhci-hcd xhci-hcd.1.auto: Host supports USB 3.1 Enhanced SuperSpeed
+[ 1484.702292] [T14117] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 6.06
+[ 1484.702294] [T14117] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[ 1484.702295] [T14117] usb usb1: Product: xHCI Host Controller
+[ 1484.702297] [T14117] usb usb1: Manufacturer: Linux 6.6.89-android15-8-g14220ae4ce65-ab13680582-4k xhci-hcd
+[ 1484.702298] [T14117] usb usb1: SerialNumber: xhci-hcd.1.auto
+[ 1484.703301] [T14117] hub 1-0:1.0: USB hub found
+[ 1484.703316] [T14117] hub 1-0:1.0: 1 port detected
+[ 1484.703889] [T14117] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[ 1484.703940] [T14117] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 6.06
+[ 1484.703942] [T14117] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[ 1484.703944] [T14117] usb usb2: Product: xHCI Host Controller
+[ 1484.703945] [T14117] usb usb2: Manufacturer: Linux 6.6.89-android15-8-g14220ae4ce65-ab13680582-4k xhci-hcd
+[ 1484.703946] [T14117] usb usb2: SerialNumber: xhci-hcd.1.auto
+[ 1484.704433] [T14117] hub 2-0:1.0: USB hub found
+[ 1484.704450] [T14117] hub 2-0:1.0: 1 port detected
+[ 1484.740722] [ T2517] read descriptors
+[ 1484.740727] [ T2517] bcdVersion must be 0x0100, stored in Little Endian order. Userspace driver should be fixed, accepting 0x0001 for compatibility.
+[ 1484.740729] [ T2517] bcdVersion must be 0x0100, stored in Little Endian order. Userspace driver should be fixed, accepting 0x0001 for compatibility.
+[ 1484.740733] [ T2517] read strings
+[ 1484.769594] [    T1] init: ... started service 'vendor.qvirtservice_rs' has pid 16953
+[ 1484.777453] [    T1] init: Service 'vendor.qvirtservice_rs' (pid 16953) exited with status 1
+[ 1484.777462] [    T1] init: Sending signal 9 to service 'vendor.qvirtservice_rs' (pid 16953) process group...
+[ 1484.777588] [    T1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_0/pid_16953
+[ 1484.777599] [    T1] init: process with updatable components 'vendor.qvirtservice_rs' exited 4 times in 4 minutes
+[ 1484.778241] [    T1] init: processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+[ 1484.778345] [    T1] init: starting service 'exec 298 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+[ 1484.779984] [    T1] init: ... started service 'exec 298 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 16954
+[ 1484.780013] [    T1] init: SVC_EXEC service 'exec 298 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 16954 (uid 1000 gid 1000+0 context default) started; waiting...
+[ 1484.789918] [    T1] init: Service 'exec 298 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 16954) exited with status 0 waiting took 0.010000 seconds
+[ 1485.088624] [T13766] usb 1-1: new full-speed USB device number 2 using xhci-hcd
+[ 1485.226741] [T13766] usb 1-1: New USB device found, idVendor=20bc, idProduct=515b, bcdDevice= 1.00
+[ 1485.226754] [T13766] usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1485.226761] [T13766] usb 1-1: Product: BTP-KP40D XINPUT WIRED
+[ 1485.226767] [T13766] usb 1-1: Manufacturer: BEITONG
+[ 1485.253024] [T13766] input: BEITONG KP40 as /devices/platform/soc/a600000.ssusb/a600000.dwc3/xhci-hcd.1.auto/usb1/1-1/1-1:1.0/input/input111
+[ 1485.255539] [T13766] input: BEITONG BTP-KP40D XINPUT WIRED as /devices/platform/soc/a600000.ssusb/a600000.dwc3/xhci-hcd.1.auto/usb1/1-1/1-1:1.1/0003:20BC:515B.003A/input/input112
+[ 1485.255608] [T13766] input: BEITONG BTP-KP40D XINPUT WIRED Mouse as /devices/platform/soc/a600000.ssusb/a600000.dwc3/xhci-hcd.1.auto/usb1/1-1/1-1:1.1/0003:20BC:515B.003A/input/input113
+[ 1485.308722] [T13766] input: BEITONG BTP-KP40D XINPUT WIRED Keyboard as /devices/platform/soc/a600000.ssusb/a600000.dwc3/xhci-hcd.1.auto/usb1/1-1/1-1:1.1/0003:20BC:515B.003A/input/input114
+[ 1485.310463] [T13766] [magic_key][key_connect:315] connect
+[ 1485.310586] [T13766] hid-generic 0003:20BC:515B.003A: input,hiddev96,hidraw0: USB HID v1.11 Mouse [BEITONG BTP-KP40D XINPUT WIRED] on usb-xhci-hcd.1.auto-1/input1
+[ 1485.653510] [T13649] [LENOVO_UCSI] cur_role = HOST, new_role = HOST, present = [1 0]
+[ 1485.653653] [T13649] [LENOVO_UCSI] dwc3_msm_set_role: kobject_uevent_env+++uen2:usbc1c2
+[ 1485.876165] [T16966] xpad 1-1:1.0: xpad_try_sending_next_out_packet - usb_submit_urb failed with result -2
+[ 1485.877626] [T16966] [magic_key][key_disconnect:341] disconnect
+[ 1486.574672] [T13766] lenovo_sys_temp soc:sys_temp_support: temperature model V=3 prod=1 front_temp=36500 back_temp=35756 user_temp=37106 user_front=37106 user_backleft=32914 user_backright=32996
+[ 1486.574687] [T13766] lenovo_sys_temp soc:sys_temp_support: [Thermal] quiet-therm temp: 34658
+[ 1486.574690] [T13766] lenovo_sys_temp soc:sys_temp_support: [Thermal] lcm-thermal temp: 35732
+[ 1486.792270] [T13766] usb 1-1: USB disconnect, device number 2
+[ 1487.387451] [ T2460] android time 2026-01-10 15:16:00.739062975
+[ 1487.545033] [T13766] usb 1-1: new full-speed USB device number 3 using xhci-hcd
+[ 1487.590786] [T14117] BATTERY_CHG: lenovo_chg_monitor_work: TYPE = [Unknown,4,9], VBUS = [5241000,0], USB_TEMP = [340,345], BATT_TEMP = 327, GPIO:[0,0]
+[ 1487.684466] [T13766] usb 1-1: New USB device found, idVendor=057e, idProduct=2069, bcdDevice= 2.00
+[ 1487.684482] [T13766] usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1487.684489] [T13766] usb 1-1: Product: BTP-KP40D NS WIRED
+[ 1487.684495] [T13766] usb 1-1: Manufacturer: BEITONG
+[ 1487.701043] [T13766] input: BEITONG BTP-KP40D NS WIRED as /devices/platform/soc/a600000.ssusb/a600000.dwc3/xhci-hcd.1.auto/usb1/1-1/1-1:1.0/0003:057E:2069.003B/input/input115
+[ 1487.756571] [T13766] hid-generic 0003:057E:2069.003B: input,hidraw0: USB HID v1.11 Gamepad [BEITONG BTP-KP40D NS WIRED] on usb-xhci-hcd.1.auto-1/input0
+[ 1488.936366] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3793: Notification type:4, early_trigger:1
+[ 1488.936383] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3817: Received fps change old fps:60 new fps:120
+[ 1488.938659] [ T1150] [drm:dsi_display_set_mode [msm_drm]] [msm-dsi-info]: mdp_transfer_time=0, hactive=1904, vactive=3040, fps=120, clk_rate=758650000
+[ 1488.943452] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3793: Notification type:4, early_trigger:0
+[ 1488.943462] [ T1150] [NVT-ts] nvt_panel_notifier_callback 3817: Received fps change old fps:60 new fps:120
+[ 1489.125031] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 355
+[ 1489.133379] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 355
+[ 1489.141704] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 354
+[ 1489.150101] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 354
+[ 1489.158421] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 354
+[ 1489.166753] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 354
+[ 1489.175300] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 353
+[ 1489.183122] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 353
+[ 1489.191621] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 353
+[ 1489.199766] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 352
+[ 1489.208214] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 352
+[ 1489.217037] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 352
+[ 1489.225118] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 352
+[ 1489.233619] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 351
+[ 1489.241965] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 351
+[ 1489.250093] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 351
+[ 1489.258414] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 350
+[ 1489.266772] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 350
+[ 1489.275288] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 350
+[ 1489.283430] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 350
+[ 1489.291638] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 349
+[ 1489.300086] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 349
+[ 1489.308419] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 349
+[ 1489.316719] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 348
+[ 1489.325099] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 348
+[ 1489.325381] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 5c d9 05 01 4b 72 01 48 f8 00 00
+[ 1489.325388] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1489.333400] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 348
+[ 1489.341795] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 348
+[ 1489.350105] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 347
+[ 1489.358456] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 347
+[ 1489.366774] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 347
+[ 1489.375017] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 346
+[ 1489.383256] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 346
+[ 1489.391751] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 346
+[ 1489.399872] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 346
+[ 1489.408489] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 345
+[ 1489.417789] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 345
+[ 1489.425486] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 345
+[ 1489.433192] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 344
+[ 1489.441760] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 344
+[ 1489.450077] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 344
+[ 1489.458422] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 344
+[ 1489.466561] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 343
+[ 1489.474948] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 343
+[ 1489.483426] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 343
+[ 1489.491930] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 343
+[ 1489.500081] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 342
+[ 1489.508444] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 342
+[ 1489.516795] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 342
+[ 1489.525190] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 341
+[ 1489.525494] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 56 d9 05 01 4b 72 01 48 f8 00 00
+[ 1489.525500] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1489.533460] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 341
+[ 1489.541750] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 341
+[ 1489.550292] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 341
+[ 1489.558608] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 340
+[ 1489.566595] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 340
+[ 1489.574963] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 340
+[ 1489.583482] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 339
+[ 1489.591449] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 339
+[ 1489.599886] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 339
+[ 1489.608074] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 339
+[ 1489.616999] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 338
+[ 1489.624986] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 338
+[ 1489.633433] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 338
+[ 1489.641716] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 338
+[ 1489.650036] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 337
+[ 1489.658415] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 337
+[ 1489.666758] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 337
+[ 1489.675091] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 336
+[ 1489.683623] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 336
+[ 1489.691937] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 336
+[ 1489.698179] [T13766] usb 1-1: USB disconnect, device number 3
+[ 1489.699832] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 336
+[ 1489.708146] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 335
+[ 1489.716788] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 335
+[ 1489.724855] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 335
+[ 1489.725033] [ T1771] [drm] BL_REGS:00000000: 65 39 32 04 01 4f d9 05 01 4b 72 01 48 f8 00 00
+[ 1489.725036] [ T1771] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1489.733163] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 335
+[ 1489.741450] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 334
+[ 1489.750053] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 334
+[ 1489.753561] [T16291] UCSI: handle_ucsi_read_ack: [LENOVO_UCSI] port_num = 1, change = 0x5804, flag = 0x0000, partner_type = 0, usb = 0, opmode = 0, dev_type = 7, c1_data = 0, c2_data = 0, gpio = 0
+[ 1489.753745] [T16291] UCSI: handle_ucsi_read_ack: [LENOVO_UCSI] port_num = 1, change = 0x5804, flag = 0x0000, partner_type = 0, usb = 0, opmode = 0, dev_type = 7, c1_data = 0, c2_data = 0, gpio = 0
+[ 1489.755084] [ T1771] [LENOVO_UCSI] cur_role = HOST, new_role = NONE, present = [0 0]
+[ 1489.755142] [ T1771] [LENOVO_UCSI] dwc3_msm_set_role: kobject_uevent_env+++uen2:usbc1c2
+[ 1489.755307] [  T998] xhci-hcd xhci-hcd.1.auto: remove, state 4
+[ 1489.755318] [  T998] usb usb2: USB disconnect, device number 1
+[ 1489.758264] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 334
+[ 1489.759386] [  T998] xhci-hcd xhci-hcd.1.auto: USB bus 2 deregistered
+[ 1489.759571] [  T998] xhci-hcd xhci-hcd.1.auto: remove, state 1
+[ 1489.759575] [  T998] usb usb1: USB disconnect, device number 1
+[ 1489.761348] [ T1638] healthd: battery l=34 v=3798 t=32.7 h=2 st=3 c=715000 fc=7509000 cc=44 chg=
+[ 1489.766393] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 333
+[ 1489.769545] [  T998] xhci-hcd xhci-hcd.1.auto: USB bus 1 deregistered
+[ 1489.771571] [  T998] bcdVersion must be 0x0100, stored in Little Endian order. Userspace driver should be fixed, accepting 0x0001 for compatibility.
+[ 1489.771574] [  T998] bcdVersion must be 0x0100, stored in Little Endian order. Userspace driver should be fixed, accepting 0x0001 for compatibility.
+[ 1489.774858] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 333
+[ 1489.776289] [    T1] init: Service 'vendor.qvirtservice_rs' (pid 16980) exited with status 1
+[ 1489.776300] [    T1] init: Sending signal 9 to service 'vendor.qvirtservice_rs' (pid 16980) process group...
+[ 1489.776464] [    T1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_0/pid_16980
+[ 1489.776473] [    T1] init: process with updatable components 'vendor.qvirtservice_rs' exited 4 times in 4 minutes
+[ 1489.776877] [    T1] init: processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+[ 1489.776974] [    T1] init: starting service 'exec 299 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+[ 1489.778418] [    T1] init: ... started service 'exec 299 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 16983
+[ 1489.778429] [    T1] init: SVC_EXEC service 'exec 299 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 16983 (uid 1000 gid 1000+0 context default) started; waiting...
+[ 1489.783073] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 333
+[ 1489.786969] [    T1] init: Service 'exec 299 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 16983) exited with status 0 waiting took 0.009000 seconds
+[ 1489.786976] [    T1] init: Sending signal 9 to service 'exec 299 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 16983) process group...
+[ 1489.791443] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 333
+[ 1489.792303] [  T998] dwc3 a600000.dwc3: Set IRQ thread:irq/290-dwc3 pid:16981 to SCHED_NORMAL prio
+[ 1489.796506] [  T998] msm_m31_eusb2_phy 88e3000.hsphy: Avail curr from USB = 0
+[ 1489.799842] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 332
+[ 1489.801824] [T11733] msm-dwc3 a600000.ssusb: DWC3 in low power mode
+[ 1489.808299] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 332
+[ 1489.816704] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 332
+[ 1489.824945] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 332
+[ 1489.833328] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 331
+[ 1489.841626] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 331
+[ 1489.849973] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 331
+[ 1489.858257] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 330
+[ 1489.866686] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 330
+[ 1489.875301] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 330
+[ 1489.883451] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 330
+[ 1489.891614] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 329
+[ 1489.899957] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 329
+[ 1489.908308] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 329
+[ 1489.916741] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 329
+[ 1489.925139] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 328
+[ 1489.925266] [  T998] [drm] BL_REGS:00000000: 65 39 32 04 01 49 d9 05 01 4b 72 01 48 f8 00 00
+[ 1489.925274] [  T998] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1489.933421] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 328
+[ 1489.941942] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 328
+[ 1489.950268] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 327
+[ 1489.958620] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 327
+[ 1489.966841] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 327
+[ 1489.974790] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 327
+[ 1489.983008] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 326
+[ 1489.991544] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 326
+[ 1489.999705] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 326
+[ 1490.008312] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 326
+[ 1490.016603] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 325
+[ 1490.024953] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 325
+[ 1490.033271] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 325
+[ 1490.041610] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 324
+[ 1490.050031] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 324
+[ 1490.058180] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 324
+[ 1490.066635] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 324
+[ 1490.074861] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 323
+[ 1490.083390] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 323
+[ 1490.091725] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 323
+[ 1490.100339] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 323
+[ 1490.108506] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 322
+[ 1490.116723] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 322
+[ 1490.125152] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 322
+[ 1490.125431] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 42 d9 05 01 4b 72 01 48 f8 00 00
+[ 1490.125439] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1490.133207] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 322
+[ 1490.141814] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 321
+[ 1490.150073] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 321
+[ 1490.158603] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 321
+[ 1490.166732] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 320
+[ 1490.175050] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 320
+[ 1490.183388] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 320
+[ 1490.191412] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 320
+[ 1490.199795] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 319
+[ 1490.208059] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 319
+[ 1490.216914] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 319
+[ 1490.225294] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 319
+[ 1490.233605] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 318
+[ 1490.241922] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 318
+[ 1490.250265] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 318
+[ 1490.258583] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 317
+[ 1490.266727] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 317
+[ 1490.274798] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 317
+[ 1490.283331] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 317
+[ 1490.291650] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 316
+[ 1490.299997] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 316
+[ 1490.308475] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 316
+[ 1490.316654] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 316
+[ 1490.325069] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 315
+[ 1490.325758] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 3c d9 05 01 4b 72 01 48 f8 00 00
+[ 1490.325763] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1490.333198] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 315
+[ 1490.341552] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 315
+[ 1490.350121] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 315
+[ 1490.358333] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 314
+[ 1490.366797] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 314
+[ 1490.375028] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 314
+[ 1490.383269] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 313
+[ 1490.391412] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 313
+[ 1490.399779] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 313
+[ 1490.408040] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 313
+[ 1490.416590] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 312
+[ 1490.425101] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 312
+[ 1490.433367] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 312
+[ 1490.441610] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 312
+[ 1490.449819] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 311
+[ 1490.458326] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 311
+[ 1490.466684] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 311
+[ 1490.474903] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 311
+[ 1490.483316] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 310
+[ 1490.491449] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 310
+[ 1490.499991] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 310
+[ 1490.508360] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 310
+[ 1490.516608] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 309
+[ 1490.525041] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 309
+[ 1490.525434] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 35 d9 05 01 4b 72 01 48 f8 00 00
+[ 1490.525440] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1490.533187] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 309
+[ 1490.541631] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 308
+[ 1490.549853] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 308
+[ 1490.558297] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 308
+[ 1490.566526] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 308
+[ 1490.574969] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 307
+[ 1490.583341] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 307
+[ 1490.591612] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 307
+[ 1490.599740] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 307
+[ 1490.608061] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 306
+[ 1490.616623] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 306
+[ 1490.625083] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 306
+[ 1490.633390] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 306
+[ 1490.641935] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 305
+[ 1490.650055] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 305
+[ 1490.658341] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 305
+[ 1490.666703] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 305
+[ 1490.675234] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 304
+[ 1490.683366] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 304
+[ 1490.691920] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 304
+[ 1490.700034] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 303
+[ 1490.708642] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 303
+[ 1490.716464] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 303
+[ 1490.724675] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 303
+[ 1490.725058] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 2f d9 05 01 4b 72 01 48 f8 00 00
+[ 1490.725060] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1490.733080] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 302
+[ 1490.741597] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 302
+[ 1490.749913] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 302
+[ 1490.758236] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 302
+[ 1490.766452] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 301
+[ 1490.774901] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 301
+[ 1490.783248] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 301
+[ 1490.791677] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 301
+[ 1490.799672] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 300
+[ 1490.808265] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 300
+[ 1490.816698] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 300
+[ 1490.824927] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 300
+[ 1490.833263] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 299
+[ 1490.841552] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 299
+[ 1490.849975] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 299
+[ 1490.858334] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 299
+[ 1490.866632] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 298
+[ 1490.874959] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 298
+[ 1490.883301] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 298
+[ 1490.891642] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 298
+[ 1490.899956] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 297
+[ 1490.908221] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 297
+[ 1490.916657] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 297
+[ 1490.924871] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 296
+[ 1490.925242] [   T90] [drm] BL_REGS:00000000: 65 39 32 04 01 29 d9 05 01 4b 72 01 48 f8 00 00
+[ 1490.925250] [   T90] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1490.933317] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 296
+[ 1490.941621] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 296
+[ 1490.949968] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 296
+[ 1490.958143] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 295
+[ 1490.966352] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 295
+[ 1490.974747] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 295
+[ 1490.982996] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 295
+[ 1490.991318] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 294
+[ 1490.999634] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 294
+[ 1491.007951] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 294
+[ 1491.016459] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 294
+[ 1491.024668] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 293
+[ 1491.032987] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 293
+[ 1491.041289] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 293
+[ 1491.049623] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 293
+[ 1491.057943] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 292
+[ 1491.066409] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 292
+[ 1491.074857] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 292
+[ 1491.082990] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 292
+[ 1491.091489] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 291
+[ 1491.099694] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 291
+[ 1491.108151] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 291
+[ 1491.116492] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 291
+[ 1491.124738] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 290
+[ 1491.125163] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 23 d9 05 01 4b 72 01 48 f8 00 00
+[ 1491.125166] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1491.133075] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 290
+[ 1491.141403] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 290
+[ 1491.149644] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 290
+[ 1491.157976] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 289
+[ 1491.166384] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 289
+[ 1491.174719] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 289
+[ 1491.182978] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 289
+[ 1491.191388] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 288
+[ 1491.199636] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 288
+[ 1491.207996] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 288
+[ 1491.216413] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 288
+[ 1491.224762] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 287
+[ 1491.232961] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 287
+[ 1491.241285] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 287
+[ 1491.249608] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 287
+[ 1491.257933] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 286
+[ 1491.266457] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 286
+[ 1491.274792] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 286
+[ 1491.282996] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 286
+[ 1491.291474] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 285
+[ 1491.299657] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 285
+[ 1491.308004] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 285
+[ 1491.316392] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 284
+[ 1491.324808] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 284
+[ 1491.325267] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 1c d9 05 01 4b 72 01 48 f8 00 00
+[ 1491.325271] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1491.333055] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 284
+[ 1491.341458] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 284
+[ 1491.349791] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 283
+[ 1491.358094] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 283
+[ 1491.366382] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 283
+[ 1491.374762] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 283
+[ 1491.383091] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 282
+[ 1491.391332] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 282
+[ 1491.399816] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 282
+[ 1491.408101] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 282
+[ 1491.416392] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 281
+[ 1491.424782] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 281
+[ 1491.433116] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 281
+[ 1491.441418] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 281
+[ 1491.449757] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 280
+[ 1491.458102] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 280
+[ 1491.466428] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 280
+[ 1491.474653] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 280
+[ 1491.483440] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 279
+[ 1491.491874] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 279
+[ 1491.500388] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 279
+[ 1491.508073] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 279
+[ 1491.516444] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 278
+[ 1491.524684] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 278
+[ 1491.525156] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 16 d9 05 01 4b 72 01 48 f8 00 00
+[ 1491.525160] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1491.533035] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 278
+[ 1491.541361] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 278
+[ 1491.549677] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 277
+[ 1491.558018] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 277
+[ 1491.566367] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 277
+[ 1491.574701] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 277
+[ 1491.583021] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 276
+[ 1491.591353] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 276
+[ 1491.599700] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 276
+[ 1491.608009] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 276
+[ 1491.616363] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 275
+[ 1491.624730] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 275
+[ 1491.632952] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 275
+[ 1491.641279] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 275
+[ 1491.649532] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 274
+[ 1491.657859] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 274
+[ 1491.666190] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 274
+[ 1491.674539] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 274
+[ 1491.682874] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 273
+[ 1491.691207] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 273
+[ 1491.693355] [T13766] lenovo_sys_temp soc:sys_temp_support: temperature model V=3 prod=1 front_temp=36612 back_temp=35757 user_temp=37094 user_front=37094 user_backleft=32914 user_backright=32992
+[ 1491.693361] [T13766] lenovo_sys_temp soc:sys_temp_support: [Thermal] quiet-therm temp: 34658
+[ 1491.693363] [T13766] lenovo_sys_temp soc:sys_temp_support: [Thermal] lcm-thermal temp: 35790
+[ 1491.699535] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 273
+[ 1491.707864] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 273
+[ 1491.716281] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 273
+[ 1491.724656] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 272
+[ 1491.725035] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 11 d9 05 01 4b 72 01 48 f8 00 00
+[ 1491.725039] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1491.732972] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 272
+[ 1491.741378] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 272
+[ 1491.749638] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 272
+[ 1491.758054] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 271
+[ 1491.766341] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 271
+[ 1491.774653] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 271
+[ 1491.782982] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 271
+[ 1491.791313] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 270
+[ 1491.799625] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 270
+[ 1491.807877] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 270
+[ 1491.816390] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 270
+[ 1491.824649] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 269
+[ 1491.832973] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 269
+[ 1491.841258] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 269
+[ 1491.849631] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 269
+[ 1491.857967] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 268
+[ 1491.866300] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 268
+[ 1491.874537] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 268
+[ 1491.882865] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 268
+[ 1491.891195] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 267
+[ 1491.899521] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 267
+[ 1491.907861] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 267
+[ 1491.916319] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 267
+[ 1491.924669] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 266
+[ 1491.925192] [T14117] [drm] BL_REGS:00000000: 65 39 32 04 01 0b d9 05 01 4b 72 01 48 f8 00 00
+[ 1491.925195] [T14117] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1491.933037] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 266
+[ 1491.941523] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 266
+[ 1491.949714] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 266
+[ 1491.958467] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 265
+[ 1491.966654] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 265
+[ 1491.974698] [ T1687] [haptic_hv]<right>input_upload_effect: FF_PERIODIC waveform id = 2, wav_id_max = 167, gain = 0x80
+[ 1491.974808] [ T1687] [haptic_hv]<left>input_upload_effect: FF_PERIODIC waveform id = 2, wav_id_max = 167, gain = 0x80
+[ 1491.974873] [T16291] [haptic_hv]<right>input_vib_work_routine: aw_haptic->activate_mode: 1
+[ 1491.974878] [T16291] [haptic_hv]<right>aw8693x_stop: enter
+[ 1491.974937] [   T11] [haptic_hv]<left>input_vib_work_routine: aw_haptic->activate_mode: 1
+[ 1491.974940] [   T11] [haptic_hv]<left>aw8693x_stop: enter
+[ 1491.975347] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 265
+[ 1491.977508] [T16291] [haptic_hv]<right>aw8693x_wait_enter_standby: entered standby!
+[ 1491.977512] [T16291] [haptic_hv]<right>aw8693x_upload_lra: write f0_cali_data to trim_lra = 0x00
+[ 1491.977762] [   T11] [haptic_hv]<left>aw8693x_wait_enter_standby: entered standby!
+[ 1491.977765] [   T11] [haptic_hv]<left>aw8693x_upload_lra: write f0_cali_data to trim_lra = 0x00
+[ 1491.978347] [T16291] [haptic_hv]<right>ram_vbat_comp: ram vbat comp close
+[ 1491.978481] [   T11] [haptic_hv]<left>ram_vbat_comp: ram vbat comp close
+[ 1491.980411] [T16291] [haptic_hv]<right>aw8693x_play_mode: enter ram mode
+[ 1491.980576] [   T11] [haptic_hv]<left>aw8693x_play_mode: enter ram mode
+[ 1491.981785] [T16291] [haptic_hv]<right>aw8693x_bst_mode_config: haptic bst mode = bst
+[ 1491.981908] [   T11] [haptic_hv]<left>aw8693x_bst_mode_config: haptic bst mode = bst
+[ 1491.983080] [T16291] [haptic_hv]<right>aw8693x_play_go: start haptic notify, duration = 0!
+
+[ 1491.983083] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 265
+[ 1491.983084] [T16291] [haptic_hv]<right>aw8693x_play_go: enter, flag = 1
+[ 1491.983240] [   T11] [haptic_hv]<left>aw8693x_play_go: start haptic notify, duration = 0!
+
+[ 1491.983242] [   T11] [haptic_hv]<left>aw8693x_play_go: enter, flag = 1
+[ 1491.991481] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 264
+[ 1491.999857] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 264
+[ 1492.008053] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 264
+[ 1492.016448] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 264
+[ 1492.024762] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 263
+[ 1492.033104] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 263
+[ 1492.041313] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 263
+[ 1492.049706] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 263
+[ 1492.057982] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 262
+[ 1492.066435] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 262
+[ 1492.074754] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 262
+[ 1492.075670] [   T11] [haptic_hv]<right>aw8693x_stop: enter
+[ 1492.075692] [T16291] [haptic_hv]<left>aw8693x_stop: enter
+[ 1492.077282] [   T11] [haptic_hv]<right>aw8693x_wait_enter_standby: entered standby!
+[ 1492.077286] [   T11] [haptic_hv]<right>aw8693x_stop: stop haptic notify!
+[ 1492.077521] [T16291] [haptic_hv]<left>aw8693x_wait_enter_standby: entered standby!
+[ 1492.077524] [T16291] [haptic_hv]<left>aw8693x_stop: stop haptic notify!
+[ 1492.083106] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 262
+[ 1492.091424] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 262
+[ 1492.099644] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 261
+[ 1492.108092] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 261
+[ 1492.116431] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 261
+[ 1492.124718] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 261
+[ 1492.125098] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 01 05 d9 05 01 4b 72 01 48 f8 00 00
+[ 1492.125101] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1492.133097] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 260
+[ 1492.141309] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 260
+[ 1492.149715] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 260
+[ 1492.158076] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 260
+[ 1492.166399] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 259
+[ 1492.174740] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 259
+[ 1492.183080] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 259
+[ 1492.191405] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 259
+[ 1492.199727] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 258
+[ 1492.208062] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 258
+[ 1492.216493] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 258
+[ 1492.224684] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 258
+[ 1492.233094] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 257
+[ 1492.241421] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 257
+[ 1492.249731] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 257
+[ 1492.258072] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 257
+[ 1492.266395] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 256
+[ 1492.274721] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 256
+[ 1492.283069] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 256
+[ 1492.291397] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 256
+[ 1492.299724] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 256
+[ 1492.308050] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 255
+[ 1492.316358] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 255
+[ 1492.324755] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 255
+[ 1492.325153] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 ff d9 05 01 4b 72 01 48 f8 00 00
+[ 1492.325157] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1492.333113] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 255
+[ 1492.341421] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 254
+[ 1492.349721] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 254
+[ 1492.358025] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 254
+[ 1492.366393] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 254
+[ 1492.374722] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 253
+[ 1492.383066] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 253
+[ 1492.391403] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 253
+[ 1492.399724] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 253
+[ 1492.408065] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 252
+[ 1492.416472] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 252
+[ 1492.424714] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 252
+[ 1492.433087] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 252
+[ 1492.441292] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 251
+[ 1492.449685] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 251
+[ 1492.457969] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 251
+[ 1492.466420] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 251
+[ 1492.474721] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 251
+[ 1492.483063] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 250
+[ 1492.491406] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 250
+[ 1492.499637] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 250
+[ 1492.508051] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 250
+[ 1492.516414] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 249
+[ 1492.524883] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 249
+[ 1492.525279] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 f9 d9 05 01 4b 72 01 48 f8 00 00
+[ 1492.525282] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1492.533142] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 249
+[ 1492.541299] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 249
+[ 1492.549741] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 248
+[ 1492.558055] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 248
+[ 1492.566393] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 248
+[ 1492.574638] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 248
+[ 1492.583074] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 247
+[ 1492.591337] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 247
+[ 1492.599723] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 247
+[ 1492.608061] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 247
+[ 1492.616441] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 246
+[ 1492.624680] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 246
+[ 1492.633064] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 246
+[ 1492.641317] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 246
+[ 1492.649718] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 246
+[ 1492.657982] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 245
+[ 1492.666389] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 245
+[ 1492.674740] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 245
+[ 1492.683028] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 245
+[ 1492.691355] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 244
+[ 1492.699596] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 244
+[ 1492.706525] [T14117] BATTERY_CHG: lenovo_chg_monitor_work: TYPE = [Unknown,4,9], VBUS = [3188000,29000], USB_TEMP = [340,345], BATT_TEMP = 327, GPIO:[0,0]
+[ 1492.707908] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 244
+[ 1492.716392] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 244
+[ 1492.724629] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 243
+[ 1492.725201] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 f4 d9 05 01 4b 72 01 48 f8 00 00
+[ 1492.725204] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1492.732966] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 243
+[ 1492.741301] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 243
+[ 1492.749642] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 243
+[ 1492.758041] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 243
+[ 1492.766264] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 242
+[ 1492.775297] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 242
+[ 1492.783660] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 242
+[ 1492.791303] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 242
+[ 1492.799602] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 241
+[ 1492.807839] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 241
+[ 1492.816319] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 241
+[ 1492.824583] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 241
+[ 1492.832841] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 240
+[ 1492.841163] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 240
+[ 1492.849489] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 240
+[ 1492.857822] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 240
+[ 1492.866158] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 240
+[ 1492.874587] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 239
+[ 1492.882994] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 239
+[ 1492.891330] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 239
+[ 1492.899691] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 239
+[ 1492.907952] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 238
+[ 1492.916274] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 238
+[ 1492.924740] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 238
+[ 1492.925101] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 ee d9 05 01 4b 72 01 48 f8 00 00
+[ 1492.925104] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1492.932880] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 238
+[ 1492.941282] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 237
+[ 1492.949602] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 237
+[ 1492.958006] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 237
+[ 1492.966356] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 237
+[ 1492.974680] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 237
+[ 1492.983018] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 236
+[ 1492.991347] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 236
+[ 1492.999689] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 236
+[ 1493.008018] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 236
+[ 1493.016440] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 235
+[ 1493.024940] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 235
+[ 1493.032922] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 235
+[ 1493.041263] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 235
+[ 1493.049580] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 234
+[ 1493.057929] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 234
+[ 1493.066338] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 234
+[ 1493.074642] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 234
+[ 1493.082970] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 234
+[ 1493.091458] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 233
+[ 1493.099705] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 233
+[ 1493.108033] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 233
+[ 1493.116398] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 233
+[ 1493.124733] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 232
+[ 1493.125110] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 e9 d9 05 01 4b 72 01 48 f8 00 00
+[ 1493.125113] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1493.133089] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 232
+[ 1493.141389] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 232
+[ 1493.149602] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 232
+[ 1493.158043] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 231
+[ 1493.166380] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 231
+[ 1493.174630] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 231
+[ 1493.183050] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 231
+[ 1493.191352] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 231
+[ 1493.199589] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 230
+[ 1493.207979] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 230
+[ 1493.216500] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 230
+[ 1493.224717] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 230
+[ 1493.233067] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 229
+[ 1493.241402] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 229
+[ 1493.249718] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 229
+[ 1493.257918] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 229
+[ 1493.266361] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 229
+[ 1493.274707] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 228
+[ 1493.283034] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 228
+[ 1493.291359] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 228
+[ 1493.299697] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 228
+[ 1493.308016] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 227
+[ 1493.316327] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 227
+[ 1493.324661] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 227
+[ 1493.325179] [T14117] [drm] BL_REGS:00000000: 65 39 32 04 00 e3 d9 05 01 4b 72 01 48 f8 00 00
+[ 1493.325183] [T14117] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1493.332930] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 227
+[ 1493.341436] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 227
+[ 1493.349682] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 226
+[ 1493.358092] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 226
+[ 1493.366267] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 226
+[ 1493.374686] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 226
+[ 1493.382937] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 225
+[ 1493.391359] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 225
+[ 1493.399606] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 225
+[ 1493.408018] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 225
+[ 1493.416445] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 225
+[ 1493.424643] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 224
+[ 1493.433043] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 224
+[ 1493.441359] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 224
+[ 1493.449706] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 224
+[ 1493.458022] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 223
+[ 1493.466368] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 223
+[ 1493.474683] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 223
+[ 1493.483030] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 223
+[ 1493.491355] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 223
+[ 1493.499691] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 222
+[ 1493.508010] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 222
+[ 1493.516385] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 222
+[ 1493.524814] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 222
+[ 1493.525260] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 de d9 05 01 4b 72 01 48 f8 00 00
+[ 1493.525264] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1493.532959] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 221
+[ 1493.541262] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 221
+[ 1493.549575] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 221
+[ 1493.557994] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 221
+[ 1493.566322] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 221
+[ 1493.574658] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 220
+[ 1493.582987] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 220
+[ 1493.591315] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 220
+[ 1493.599655] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 220
+[ 1493.607979] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 219
+[ 1493.616399] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 219
+[ 1493.624683] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 219
+[ 1493.632995] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 219
+[ 1493.641375] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 219
+[ 1493.649721] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 218
+[ 1493.658002] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 218
+[ 1493.666333] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 218
+[ 1493.674661] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 218
+[ 1493.682991] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 217
+[ 1493.691315] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 217
+[ 1493.699649] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 217
+[ 1493.707976] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 217
+[ 1493.716462] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 217
+[ 1493.724752] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 216
+[ 1493.725373] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 d9 d9 05 01 4b 72 01 48 f8 00 00
+[ 1493.725376] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1493.732998] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 216
+[ 1493.741333] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 216
+[ 1493.749647] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 216
+[ 1493.757919] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 215
+[ 1493.766319] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 215
+[ 1493.774663] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 215
+[ 1493.782987] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 215
+[ 1493.791305] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 215
+[ 1493.799534] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 214
+[ 1493.807831] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 214
+[ 1493.816259] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 214
+[ 1493.824546] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 214
+[ 1493.833044] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 213
+[ 1493.841349] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 213
+[ 1493.849661] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 213
+[ 1493.858088] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 213
+[ 1493.866319] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 213
+[ 1493.874642] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 212
+[ 1493.882979] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 212
+[ 1493.891317] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 212
+[ 1493.899657] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 212
+[ 1493.907986] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 212
+[ 1493.916332] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 211
+[ 1493.924766] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 211
+[ 1493.925325] [  T833] [drm] BL_REGS:00000000: 65 39 32 04 00 d3 d9 05 01 4b 72 01 48 f8 00 00
+[ 1493.925328] [  T833] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1493.932946] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 211
+[ 1493.941253] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 211
+[ 1493.949561] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 210
+[ 1493.957987] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 210
+[ 1493.966409] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 210
+[ 1493.974654] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 210
+[ 1493.982949] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 210
+[ 1493.991348] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 209
+[ 1493.999581] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 209
+[ 1494.007969] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 209
+[ 1494.016459] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 209
+[ 1494.024692] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 208
+[ 1494.032823] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 208
+[ 1494.041236] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 208
+[ 1494.049565] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 208
+[ 1494.057897] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 208
+[ 1494.066242] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 207
+[ 1494.074554] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 207
+[ 1494.082842] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 207
+[ 1494.091306] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 207
+[ 1494.099652] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 207
+[ 1494.107981] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 206
+[ 1494.116264] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 206
+[ 1494.124511] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 206
+[ 1494.125390] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 ce d9 05 01 4b 72 01 48 f8 00 00
+[ 1494.125393] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1494.132918] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 206
+[ 1494.141273] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 205
+[ 1494.149580] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 205
+[ 1494.157912] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 205
+[ 1494.166326] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 205
+[ 1494.175021] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 205
+[ 1494.183361] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 204
+[ 1494.191700] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 204
+[ 1494.199866] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 204
+[ 1494.208663] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 204
+[ 1494.216507] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 204
+[ 1494.224877] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 203
+[ 1494.233184] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 203
+[ 1494.241436] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 203
+[ 1494.249856] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 203
+[ 1494.258015] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 202
+[ 1494.266437] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 202
+[ 1494.274828] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 202
+[ 1494.283019] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 202
+[ 1494.291414] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 202
+[ 1494.299748] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 201
+[ 1494.308059] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 201
+[ 1494.316425] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 201
+[ 1494.324666] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 201
+[ 1494.325507] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 c9 d9 05 01 4b 72 01 48 f8 00 00
+[ 1494.325509] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1494.333198] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 201
+[ 1494.341479] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 200
+[ 1494.349689] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 200
+[ 1494.358073] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 200
+[ 1494.366405] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 200
+[ 1494.374782] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 200
+[ 1494.383016] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 199
+[ 1494.391346] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 199
+[ 1494.399597] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 199
+[ 1494.408005] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 199
+[ 1494.416555] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 198
+[ 1494.424844] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 198
+[ 1494.433150] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 198
+[ 1494.441359] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 198
+[ 1494.449735] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 198
+[ 1494.458171] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 197
+[ 1494.466482] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 197
+[ 1494.474910] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 197
+[ 1494.483287] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 197
+[ 1494.491460] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 197
+[ 1494.499871] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 196
+[ 1494.508192] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 196
+[ 1494.516601] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 196
+[ 1494.524994] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 196
+[ 1494.525942] [T14117] [drm] BL_REGS:00000000: 65 39 32 04 00 c4 d9 05 01 4b 72 01 48 f8 00 00
+[ 1494.525946] [T14117] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1494.533270] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 196
+[ 1494.541533] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 195
+[ 1494.549864] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 195
+[ 1494.558241] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 195
+[ 1494.566408] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 195
+[ 1494.574816] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 195
+[ 1494.583130] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 194
+[ 1494.591414] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 194
+[ 1494.599598] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 194
+[ 1494.608059] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 194
+[ 1494.616312] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 193
+[ 1494.624647] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 193
+[ 1494.633115] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 193
+[ 1494.641788] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 193
+[ 1494.649840] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 193
+[ 1494.658423] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 192
+[ 1494.666509] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 192
+[ 1494.674999] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 192
+[ 1494.683266] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 192
+[ 1494.691442] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 192
+[ 1494.700149] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 191
+[ 1494.708757] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 191
+[ 1494.716772] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 191
+[ 1494.724684] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 191
+[ 1494.725244] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 bf d9 05 01 4b 72 01 48 f8 00 00
+[ 1494.725247] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1494.732897] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 191
+[ 1494.741404] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 190
+[ 1494.749541] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 190
+[ 1494.757883] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 190
+[ 1494.766379] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 190
+[ 1494.774975] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 190
+[ 1494.783209] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 189
+[ 1494.784046] [    T1] init: Service 'vendor.qvirtservice_rs' (pid 16994) exited with status 1
+[ 1494.784057] [    T1] init: Sending signal 9 to service 'vendor.qvirtservice_rs' (pid 16994) process group...
+[ 1494.784330] [    T1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_0/pid_16994
+[ 1494.784342] [    T1] init: process with updatable components 'vendor.qvirtservice_rs' exited 4 times in 4 minutes
+[ 1494.784956] [    T1] init: processing action (sys.init.updatable_crashing=1) from (/system/etc/init/flags_health_check.rc:10)
+[ 1494.785077] [    T1] init: starting service 'exec 300 (/system/bin/flags_health_check UPDATABLE_CRASHING)'...
+[ 1494.786639] [    T1] init: ... started service 'exec 300 (/system/bin/flags_health_check UPDATABLE_CRASHING)' has pid 16995
+[ 1494.786653] [    T1] init: SVC_EXEC service 'exec 300 (/system/bin/flags_health_check UPDATABLE_CRASHING)' pid 16995 (uid 1000 gid 1000+0 context default) started; waiting...
+[ 1494.791280] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 189
+[ 1494.795473] [    T1] init: Service 'exec 300 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 16995) exited with status 0 waiting took 0.009000 seconds
+[ 1494.795479] [    T1] init: Sending signal 9 to service 'exec 300 (/system/bin/flags_health_check UPDATABLE_CRASHING)' (pid 16995) process group...
+[ 1494.799584] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 189
+[ 1494.807978] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 189
+[ 1494.816418] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 189
+[ 1494.824822] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 188
+[ 1494.832924] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 188
+[ 1494.841473] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 188
+[ 1494.850075] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 188
+[ 1494.858113] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 188
+[ 1494.866637] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 187
+[ 1494.874759] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 187
+[ 1494.883097] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 187
+[ 1494.891411] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 187
+[ 1494.899776] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 187
+[ 1494.908452] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 186
+[ 1494.916529] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 186
+[ 1494.924902] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 186
+[ 1494.925379] [   T90] [drm] BL_REGS:00000000: 65 39 32 04 00 ba d9 05 01 4b 72 01 48 f8 00 00
+[ 1494.925386] [   T90] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1494.933297] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 186
+[ 1494.941497] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 186
+[ 1494.949693] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 185
+[ 1494.958375] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 185
+[ 1494.966873] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 185
+[ 1494.974880] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 185
+[ 1494.983531] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 184
+[ 1494.991205] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 184
+[ 1494.999710] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 184
+[ 1495.008046] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 184
+[ 1495.016436] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 184
+[ 1495.024721] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 183
+[ 1495.033236] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 183
+[ 1495.041727] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 183
+[ 1495.050035] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 183
+[ 1495.058223] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 183
+[ 1495.066570] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 182
+[ 1495.074982] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 182
+[ 1495.083243] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 182
+[ 1495.091654] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 182
+[ 1495.100106] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 182
+[ 1495.108206] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 181
+[ 1495.116855] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 181
+[ 1495.125242] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 181
+[ 1495.126458] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 b5 d9 05 01 4b 72 01 48 f8 00 00
+[ 1495.126465] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1495.133616] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 181
+[ 1495.141564] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 181
+[ 1495.149859] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 180
+[ 1495.158363] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 180
+[ 1495.166565] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 180
+[ 1495.174886] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 180
+[ 1495.183117] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 180
+[ 1495.191569] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 179
+[ 1495.199456] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 179
+[ 1495.208036] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 179
+[ 1495.216531] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 179
+[ 1495.224589] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 179
+[ 1495.233189] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 178
+[ 1495.241455] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 178
+[ 1495.249963] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 178
+[ 1495.258285] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 178
+[ 1495.266633] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 178
+[ 1495.274769] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 177
+[ 1495.283138] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 177
+[ 1495.291480] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 177
+[ 1495.300006] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 177
+[ 1495.308409] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 177
+[ 1495.316755] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 176
+[ 1495.324846] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 176
+[ 1495.326737] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 b0 d9 05 01 4b 72 01 48 f8 00 00
+[ 1495.326740] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1495.333538] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 176
+[ 1495.341267] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 176
+[ 1495.349683] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 176
+[ 1495.358220] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 176
+[ 1495.366515] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 175
+[ 1495.374849] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 175
+[ 1495.383172] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 175
+[ 1495.391703] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 175
+[ 1495.400303] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 175
+[ 1495.407901] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 174
+[ 1495.416380] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 174
+[ 1495.424851] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 174
+[ 1495.433352] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 174
+[ 1495.441741] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 174
+[ 1495.449808] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 173
+[ 1495.458363] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 173
+[ 1495.466697] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 173
+[ 1495.475034] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 173
+[ 1495.483389] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 173
+[ 1495.491433] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 172
+[ 1495.499990] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 172
+[ 1495.508472] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 172
+[ 1495.516690] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 172
+[ 1495.524905] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 172
+[ 1495.525710] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 ac d9 05 01 4b 72 01 48 f8 00 00
+[ 1495.525716] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1495.533393] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 171
+[ 1495.541672] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 171
+[ 1495.549802] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 171
+[ 1495.558186] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 171
+[ 1495.566850] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 171
+[ 1495.574855] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 170
+[ 1495.583597] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 170
+[ 1495.591208] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 170
+[ 1495.599676] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 170
+[ 1495.608064] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 170
+[ 1495.616383] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 169
+[ 1495.624752] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 169
+[ 1495.633368] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 169
+[ 1495.641357] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 169
+[ 1495.650010] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 169
+[ 1495.658294] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 168
+[ 1495.666655] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 168
+[ 1495.674699] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 168
+[ 1495.683099] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 168
+[ 1495.691562] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 168
+[ 1495.699586] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 168
+[ 1495.708041] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 167
+[ 1495.716458] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 167
+[ 1495.720842] [ T1687] [haptic_hv]<right>input_upload_effect: FF_PERIODIC waveform id = 1, wav_id_max = 167, gain = 0x80
+[ 1495.720901] [ T1687] [haptic_hv]<left>input_upload_effect: FF_PERIODIC waveform id = 1, wav_id_max = 167, gain = 0x80
+[ 1495.720984] [T13649] [haptic_hv]<right>input_vib_work_routine: aw_haptic->activate_mode: 1
+[ 1495.720990] [T13649] [haptic_hv]<right>aw8693x_stop: enter
+[ 1495.720996] [   T11] [haptic_hv]<left>input_vib_work_routine: aw_haptic->activate_mode: 1
+[ 1495.721001] [   T11] [haptic_hv]<left>aw8693x_stop: enter
+[ 1495.722711] [T13649] [haptic_hv]<right>aw8693x_wait_enter_standby: entered standby!
+[ 1495.722716] [T13649] [haptic_hv]<right>aw8693x_upload_lra: write f0_cali_data to trim_lra = 0x00
+[ 1495.722924] [   T11] [haptic_hv]<left>aw8693x_wait_enter_standby: entered standby!
+[ 1495.722927] [   T11] [haptic_hv]<left>aw8693x_upload_lra: write f0_cali_data to trim_lra = 0x00
+[ 1495.723310] [T13649] [haptic_hv]<right>ram_vbat_comp: ram vbat comp close
+[ 1495.723437] [   T11] [haptic_hv]<left>ram_vbat_comp: ram vbat comp close
+[ 1495.724799] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 167
+[ 1495.725353] [T13649] [haptic_hv]<right>aw8693x_play_mode: enter ram mode
+[ 1495.725399] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 a7 d9 05 01 4b 72 01 48 f8 00 00
+[ 1495.725403] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1495.725498] [   T11] [haptic_hv]<left>aw8693x_play_mode: enter ram mode
+[ 1495.727158] [T13649] [haptic_hv]<right>aw8693x_bst_mode_config: haptic bst mode = bst
+[ 1495.727282] [   T11] [haptic_hv]<left>aw8693x_bst_mode_config: haptic bst mode = bst
+[ 1495.728504] [T13649] [haptic_hv]<right>aw8693x_play_go: start haptic notify, duration = 0!
+
+[ 1495.728508] [T13649] [haptic_hv]<right>aw8693x_play_go: enter, flag = 1
+[ 1495.728632] [   T11] [haptic_hv]<left>aw8693x_play_go: start haptic notify, duration = 0!
+
+[ 1495.728634] [   T11] [haptic_hv]<left>aw8693x_play_go: enter, flag = 1
+[ 1495.732889] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 167
+[ 1495.741255] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 167
+[ 1495.749749] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 166
+[ 1495.757964] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 166
+[ 1495.766408] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 166
+[ 1495.774747] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 166
+[ 1495.783223] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 166
+[ 1495.791649] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 165
+[ 1495.799550] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 165
+[ 1495.807855] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 165
+[ 1495.816304] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 165
+[ 1495.822380] [   T11] [haptic_hv]<right>aw8693x_stop: enter
+[ 1495.822472] [T16291] [haptic_hv]<left>aw8693x_stop: enter
+[ 1495.824737] [   T11] [haptic_hv]<right>aw8693x_wait_enter_standby: entered standby!
+[ 1495.824742] [   T11] [haptic_hv]<right>aw8693x_stop: stop haptic notify!
+[ 1495.824936] [T16291] [haptic_hv]<left>aw8693x_wait_enter_standby: entered standby!
+[ 1495.824939] [T16291] [haptic_hv]<left>aw8693x_stop: stop haptic notify!
+[ 1495.825101] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 165
+[ 1495.832769] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 164
+[ 1495.841223] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 164
+[ 1495.844044] [   T90] binder: undelivered transaction 887828, process died.
+[ 1495.849621] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 164
+[ 1495.858174] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 164
+[ 1495.866788] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 164
+[ 1495.874974] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 164
+[ 1495.883186] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 163
+[ 1495.891487] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 163
+[ 1495.899985] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 163
+[ 1495.908367] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 163
+[ 1495.916724] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 163
+[ 1495.925056] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 162
+[ 1495.926014] [T13766] [drm] BL_REGS:00000000: 65 39 32 04 00 a3 d9 05 01 4b 72 01 48 f8 00 00
+[ 1495.926022] [T13766] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1495.933139] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 162
+[ 1495.941810] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 162
+[ 1495.949819] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 162
+[ 1495.958304] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 162
+[ 1495.966438] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 161
+[ 1495.974745] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 161
+[ 1495.983100] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 161
+[ 1495.991150] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 161
+[ 1495.999974] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 161
+[ 1496.007767] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 161
+[ 1496.016365] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 160
+[ 1496.024847] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 160
+[ 1496.032913] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 160
+[ 1496.041407] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 160
+[ 1496.049856] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 160
+[ 1496.058479] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 159
+[ 1496.066345] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 159
+[ 1496.074815] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 159
+[ 1496.083297] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 159
+[ 1496.091632] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 159
+[ 1496.100008] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 158
+[ 1496.108390] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 158
+[ 1496.116754] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 158
+[ 1496.124900] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 158
+[ 1496.127092] [T14117] [drm] BL_REGS:00000000: 65 39 32 04 00 9e d9 05 01 4b 72 01 48 f8 00 00
+[ 1496.127098] [T14117] [drm] BL_REGS:00000010: 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ 1496.132969] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 158
+[ 1496.141790] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 158
+[ 1496.149794] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 157
+[ 1496.158544] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 157
+[ 1496.166838] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 157
+[ 1496.175086] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 157
+[ 1496.183173] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 157
+[ 1496.191261] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 156
+[ 1496.199671] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 156
+[ 1496.208038] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 156
+[ 1496.216514] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 156
+[ 1496.225012] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 156
+[ 1496.233341] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 155
+[ 1496.241607] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 155
+[ 1496.249828] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 155
+[ 1496.258189] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 155
+[ 1496.266524] [ T2621] [drm][bl][_bl_set_brightness:321] aw99706a: set backlight 155
