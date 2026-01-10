@@ -352,6 +352,7 @@ jobs:
           echo "CONFIG_TCP_CONG_WESTWOOD=n" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_TCP_CONG_HTCP=n" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_DEFAULT_TCP_CONG=bbr" >> ./common/arch/arm64/configs/gki_defconfig
+          echo "CONFIG_DEFAULT_NET_SCH=fq" >> ./common/arch/arm64/configs/gki_defconfig
 
           if [ "${{ inputs.use_susfs }}" == "true" ]; then
             echo "CONFIG_KSU_SUSFS=y" >> ./common/arch/arm64/configs/gki_defconfig
@@ -381,6 +382,9 @@ jobs:
 
           # 移除 check_defconfig
           sudo sed -i 's/check_defconfig//' ./common/build.config.gki
+          
+          # 设置默认 IO 调度器为 none 
+          echo "CONFIG_DEFAULT_IOSCHED=none" >> ./common/arch/arm64/configs/gki_defconfig
 
       - name: 写入内核名称
         run: |
