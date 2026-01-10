@@ -438,7 +438,7 @@ static const struct xpad_device {
 	{ 0x3537, 0x1010, "GameSir G7 SE", 0, XTYPE_XBOXONE },
 	{ 0x3767, 0x0101, "Fanatec Speedster 3 Forceshock Wheel", 0, XTYPE_XBOX },
 	{ 0x413d, 0x2104, "Black Shark Green Ghost Gamepad", 0, XTYPE_XBOX360 },
-	{ 0x20bc, 0x515b, "BEITONG KP40", 0, XTYPE_XBOX360, QUIRK_360_START },
+	{ 0x20bc, 0x515b, "BEITONG KP40", 0, XTYPE_XBOX360 },
 	{ 0xffff, 0xffff, "Chinese-made Xbox Controller", 0, XTYPE_XBOX },
 	{ 0x0000, 0x0000, "Generic X-Box pad", 0, XTYPE_UNKNOWN }
 };
@@ -1672,12 +1672,16 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 	Sending this sequence to other controllers will break initialization.
 	*/
 	bool is_shanwan = xpad->udev->manufacturer && strcasecmp("shanwan", xpad->udev->manufacturer) == 0;
-	if (!(xpad->quirks & QUIRK_360_START) && !is_shanwan) {
+	bool is_beitong = (xpad->udev->manufacturer &&
+			   strcasecmp("beitong", xpad->udev->manufacturer) == 0) ||
+			  (xpad->udev->product &&
+			   strncasecmp("BTP-", xpad->udev->product, 4) == 0);
+	if (!(xpad->quirks & QUIRK_360_START) && !is_shanwan && !is_beitong) {
 		status = 0;
 		goto err_free_ctrl_data;
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_1) || is_shanwan) {
+	if ((xpad->quirks & QUIRK_360_START_PKT_1) || is_shanwan || is_beitong) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
 		    0x1, 0xc1,
@@ -1699,7 +1703,7 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 #endif
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_2) || is_shanwan) {
+	if ((xpad->quirks & QUIRK_360_START_PKT_2) || is_shanwan || is_beitong) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
 		    0x1, 0xc1,
@@ -1720,7 +1724,7 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 #endif
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_3) || is_shanwan) {
+	if ((xpad->quirks & QUIRK_360_START_PKT_3) || is_shanwan || is_beitong) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
 		    0x1, 0xc0,
@@ -2069,6 +2073,18 @@ static int xpad_start_input(struct usb_xpad *xpad)
 			dev_warn(&xpad->dev->dev,
 				 "unable to receive magic message: %d\n",
 				 error);
+
+		/*
+		 * Some Beitong controllers require init packets
+		 * to be sent via interrupt out endpoint to stay connected.
+		 * These packets are: LED command (01 03 02) and mode init (02 08 03).
+		 * Detect Beitong by manufacturer name or product name prefix "BTP-".
+		 */
+		bool is_beitong = (xpad->udev->manufacturer &&
+				   strcasecmp("beitong", xpad->udev->manufacturer) == 0) ||
+				  (xpad->udev->product &&
+				   strncasecmp("BTP-", xpad->udev->product, 4) == 0);
+
 	}
 
 	return 0;
@@ -2323,12 +2339,51 @@ err_free_input:
 	return error;
 }
 
+static void xpad_beitong_early_init(struct usb_device *udev)
+{
+	char *data = kzalloc(20, GFP_KERNEL);
+	int actual_length;
+
+	if (!data)
+		return;
+
+	/* 
+	 * Send Beitong Interrupt Packets (LED & Mode) -> Endpoint 0x02 OUT.
+	 * Based on Wireshark capture of Beitong KP40.
+	 * Note: Interrupt packets appear BEFORE control messages in capture.
+	 */
+	data[0] = 0x01; data[1] = 0x03; data[2] = 0x02;
+	usb_interrupt_msg(udev, usb_sndintpipe(udev, 0x02), data, 3, &actual_length, 100);
+
+	mdelay(2);
+
+	data[0] = 0x02; data[1] = 0x08; data[2] = 0x03;
+	usb_interrupt_msg(udev, usb_sndintpipe(udev, 0x02), data, 3, &actual_length, 100);
+
+	/* Send Shanwan/Beitong Control Messages */
+	usb_control_msg(udev, usb_rcvctrlpipe(udev, 0), 0x01, 0xc1,
+			0x100, 0x00, data, 20, 100);
+	usb_control_msg(udev, usb_rcvctrlpipe(udev, 0), 0x01, 0xc1,
+			0x00, 0x00, data, 8, 100);
+	usb_control_msg(udev, usb_rcvctrlpipe(udev, 0), 0x01, 0xc0,
+			0x00, 0x00, data, 4, 100);
+
+	kfree(data);
+}
+
 static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id)
 {
 	struct usb_device *udev = interface_to_usbdev(intf);
 	struct usb_xpad *xpad;
 	struct usb_endpoint_descriptor *ep_irq_in, *ep_irq_out;
 	int i, error;
+	bool is_beitong = (udev->manufacturer &&
+			   strcasecmp("beitong", udev->manufacturer) == 0) ||
+			  (udev->product &&
+			   strncasecmp("BTP-", udev->product, 4) == 0);
+
+	if (is_beitong)
+		xpad_beitong_early_init(udev);
 
 	if (intf->cur_altsetting->desc.bNumEndpoints != 2)
 		return -ENODEV;
