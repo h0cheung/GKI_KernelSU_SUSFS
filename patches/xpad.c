@@ -131,6 +131,7 @@
 #define QUIRK_360_START_PKT_2	(1 << 1)
 #define QUIRK_360_START_PKT_3	(1 << 2)
 #define QUIRK_GHL_XBOXONE	(1 << 3)
+#define QUIRK_BEITONG_360_INIT	(1 << 4)
 #define QUIRK_360_START (QUIRK_360_START_PKT_1 |			\
 				QUIRK_360_START_PKT_2 | QUIRK_360_START_PKT_3)
 
@@ -438,7 +439,7 @@ static const struct xpad_device {
 	{ 0x3537, 0x1010, "GameSir G7 SE", 0, XTYPE_XBOXONE },
 	{ 0x3767, 0x0101, "Fanatec Speedster 3 Forceshock Wheel", 0, XTYPE_XBOX },
 	{ 0x413d, 0x2104, "Black Shark Green Ghost Gamepad", 0, XTYPE_XBOX360 },
-	{ 0x20bc, 0x515b, "BEITONG KP40", 0, XTYPE_XBOX360, QUIRK_360_START },
+	{ 0x20bc, 0x515b, "BEITONG KP40", 0, XTYPE_XBOX360, QUIRK_BEITONG_360_INIT | QUIRK_360_START },
 	{ 0xffff, 0xffff, "Chinese-made Xbox Controller", 0, XTYPE_XBOX },
 	{ 0x0000, 0x0000, "Generic X-Box pad", 0, XTYPE_UNKNOWN }
 };
@@ -1672,12 +1673,16 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 	Sending this sequence to other controllers will break initialization.
 	*/
 	bool is_shanwan = xpad->udev->manufacturer && strcasecmp("shanwan", xpad->udev->manufacturer) == 0;
-	if (!(xpad->quirks & QUIRK_360_START) && !is_shanwan) {
+	bool is_beitong = (xpad->udev->manufacturer &&
+			   strcasecmp("beitong", xpad->udev->manufacturer) == 0) ||
+			  (xpad->udev->product &&
+			   strncasecmp("BTP-", xpad->udev->product, 4) == 0);
+	if (!(xpad->quirks & QUIRK_360_START) && !is_shanwan && !is_beitong) {
 		status = 0;
 		goto err_free_ctrl_data;
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_1) || is_shanwan) {
+	if ((xpad->quirks & QUIRK_360_START_PKT_1) || is_shanwan || is_beitong) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
 		    0x1, 0xc1,
@@ -1699,7 +1704,7 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 #endif
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_2) || is_shanwan) {
+	if ((xpad->quirks & QUIRK_360_START_PKT_2) || is_shanwan || is_beitong) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
 		    0x1, 0xc1,
@@ -1720,7 +1725,7 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 #endif
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_3) || is_shanwan) {
+	if ((xpad->quirks & QUIRK_360_START_PKT_3) || is_shanwan || is_beitong) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
 		    0x1, 0xc0,
@@ -2069,6 +2074,46 @@ static int xpad_start_input(struct usb_xpad *xpad)
 			dev_warn(&xpad->dev->dev,
 				 "unable to receive magic message: %d\n",
 				 error);
+
+		/*
+		 * Some Beitong controllers require init packets
+		 * to be sent via interrupt out endpoint to stay connected.
+		 * These packets are: LED command (01 03 02) and mode init (02 08 03).
+		 * Detect Beitong by manufacturer name or product name prefix "BTP-".
+		 */
+		bool is_beitong = (xpad->udev->manufacturer &&
+				   strcasecmp("beitong", xpad->udev->manufacturer) == 0) ||
+				  (xpad->udev->product &&
+				   strncasecmp("BTP-", xpad->udev->product, 4) == 0);
+
+		if ((xpad->quirks & QUIRK_BEITONG_360_INIT) || is_beitong) {
+			struct xpad_output_packet *packet =
+					&xpad->out_packets[XPAD_OUT_CMD_IDX];
+			unsigned long flags;
+
+			/* Send LED init packet: 01 03 02 */
+			spin_lock_irqsave(&xpad->odata_lock, flags);
+			packet->data[0] = 0x01;
+			packet->data[1] = 0x03;
+			packet->data[2] = 0x02;
+			packet->len = 3;
+			packet->pending = true;
+			xpad_try_sending_next_out_packet(xpad);
+			spin_unlock_irqrestore(&xpad->odata_lock, flags);
+
+			/* Small delay between packets */
+			usleep_range(1000, 2000);
+
+			/* Send mode init packet: 02 08 03 */
+			spin_lock_irqsave(&xpad->odata_lock, flags);
+			packet->data[0] = 0x02;
+			packet->data[1] = 0x08;
+			packet->data[2] = 0x03;
+			packet->len = 3;
+			packet->pending = true;
+			xpad_try_sending_next_out_packet(xpad);
+			spin_unlock_irqrestore(&xpad->odata_lock, flags);
+		}
 	}
 
 	return 0;
