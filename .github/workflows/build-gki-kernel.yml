@@ -19,11 +19,6 @@ on:
           - '89'
           - '最新'
         default: '89'
-      make_release:
-        description: '是否创建 GitHub Release?'
-        required: true
-        type: boolean
-        default: true
       kernelsu_variant:
         description: "选择 KernelSU"
         required: true
@@ -451,12 +446,6 @@ jobs:
           cd kernel_workspace/common/out/arch/arm64/boot
           cp ./Image "./kernel"
 
-      - name: 上传 kernel Image
-        uses: actions/upload-artifact@v4
-        with:
-          name: kernel_${{ inputs.kernelsu_variant }}_${{ env.sub_level }}
-          path: kernel_workspace/common/out/arch/arm64/boot/kernel
-
       - name: 创建并签名 boot.img
         env:
           BOOT_SIGN_KEY: ${{ secrets.BOOT_SIGN_KEY }}
@@ -487,25 +476,9 @@ jobs:
           mv boot.img android15-${{ env.sub_level }}-boot.img
           rm Image
 
-      - name: 上传已签名的 boot
-        uses: actions/upload-artifact@v4
-        with:
-          name: Boot_${{ env.KSUVER }}_${{ env.sub_level }}_${{ inputs.kernelsu_variant }}_Signed
-          path: kernel_workspace/android15-${{ env.sub_level }}-boot.img
-
-  create-release:
-    needs: build
-    runs-on: ubuntu-24.04-arm
-    if: ${{ inputs.make_release == true }}
-    env:
-      GH_TOKEN: ${{ github.token }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: 生成 Release 信息
         run: |
-          TIMESTAMP=$(date +%Y%m%d%H%M)
+          TIMESTAMP=$(date -u +%Y%m%d%H%M)
           NEW_TAG="${{ inputs.kernelsu_variant }}-${{ inputs.sub_level }}-${TIMESTAMP}"
           echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
 
@@ -515,7 +488,9 @@ jobs:
           RELEASE_NOTES="## GKI 6.6 Kernel Build"
           RELEASE_NOTES+="\n\n**KernelSU Variant**: ${{ inputs.kernelsu_variant }}"
           RELEASE_NOTES+="\n**Kernel Version**: 6.6.${{ inputs.sub_level }}"
-          RELEASE_NOTES+="\n**SUSFS**: ${{ inputs.use_susfs && 'Enabled' || 'Disabled (Manual Hook)' }}"
+          if [ "${{ inputs.kernelsu_variant }}" != "NoRoot" ]; then
+            RELEASE_NOTES+="\n**SUSFS**: ${{ inputs.use_susfs && 'Enabled' || 'Disabled (Manual Hook)' }}"
+          fi
           RELEASE_NOTES+="\n**HymoFS**: ${{ inputs.use_hymofs && 'Enabled' || 'Disabled' }}"
           RELEASE_NOTES+="\n**LTO**: thin"
 
@@ -529,15 +504,10 @@ jobs:
           echo -e "$RELEASE_NOTES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: 下载 Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: release-artifacts
-
       - name: 准备上传文件
         run: |
           mkdir -p release-assets
-          find ./release-artifacts -type f -exec cp -v {} ./release-assets \;
+          cp kernel_workspace/android15-${{ env.sub_level }}-boot.img release-assets/
           cd release-assets
           sha256sum * > SHA256SUMS.txt
           cd ..
@@ -550,5 +520,4 @@ jobs:
           tag_name: ${{ env.NEW_TAG }}
           name: ${{ env.RELEASE_NAME }}
           body: ${{ env.RELEASE_NOTES }}
-          prerelease: true
           files: release-assets/*
