@@ -124,7 +124,7 @@ jobs:
 
           # 并行克隆所有补丁仓库
           echo "正在克隆补丁仓库..."
-          git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-android15-6.6 &
+          git clone --depth=1 https://github.com/cctv18/susfs4oki.git susfs4ksu -b oki-android15-6.6 &
           git clone https://github.com/ShirkNeko/SukiSU_patch.git &
           git clone https://github.com/Xiaomichael/kernel_patches.git &
           git clone https://github.com/cctv18/oppo_oplus_realme_sm8750.git &
@@ -234,6 +234,7 @@ jobs:
           cp ./SukiSU_patch/69_hide_stuff.patch ./common/
           cd ./common
           patch -p1 < 50_add_susfs_in_gki-android15-6.6.patch || true
+          patch -p1 -N -F 3 < 69_hide_stuff.patch || true
 
           # 6.6.56 特殊修复
           if [ "${{ inputs.sub_level }}" == "56" ]; then
