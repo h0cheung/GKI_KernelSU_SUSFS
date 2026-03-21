@@ -1671,19 +1671,80 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 	have to inspect the manufacturer string.
 	Sending this sequence to other controllers will break initialization.
 	*/
-	bool is_shanwan = xpad->udev->manufacturer && strcasecmp("shanwan", xpad->udev->manufacturer) == 0;
+	bool is_shanwan = (xpad->udev->manufacturer && strcasecmp("shanwan", xpad->udev->manufacturer) == 0) ||
+			   le16_to_cpu(xpad->udev->descriptor.idVendor) == 0x20bc;
 	if (!(xpad->quirks & QUIRK_360_START) && !is_shanwan) {
 		status = 0;
 		goto err_free_ctrl_data;
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_1) || is_shanwan) {
+	/*
+	 * For Shanwan/Beitong controllers, follow the exact Windows driver
+	 * initialization sequence captured via USB sniffer:
+	 *   1) LED command 01:03:02 (before control messages!)
+	 *   2) Control Msg 1: bmReqType=0xC1, wValue=0x0100, wLen=20
+	 *   3) Control Msg 2: bmReqType=0xC1, wValue=0x0000, wLen=8
+	 *   4) Rumble init 02:08:03 (critical - never sent by old code!)
+	 *   5) IRQ IN submission (done by caller xpad_start_input)
+	 *   6) Control Msg 3: bmReqType=0xC0, wValue=0x0000, wLen=4
+	 *   7) LED confirm 01:03:06
+	 * Steps 6-7 are handled in xpad_start_input after IRQ IN submit.
+	 */
+	if (is_shanwan) {
+		u8 *buf;
+		int actual;
+
+		buf = kzalloc(8, GFP_KERNEL);
+		if (!buf) {
+			status = -ENOMEM;
+			goto err_free_ctrl_data;
+		}
+
+		/* Step 1: LED command (before control messages!) */
+		buf[0] = 0x01; buf[1] = 0x03; buf[2] = 0x02;
+		usb_interrupt_msg(xpad->udev, xpad->irq_out->pipe,
+				  buf, 3, &actual, TIMEOUT);
+
+		/* Step 2: Control Msg 1 - Get Report, wValue=0x0100 */
+		status = usb_control_msg(xpad->udev,
+			usb_rcvctrlpipe(xpad->udev, 0),
+			0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_INTERFACE,
+			0x0100, xpad->intf->cur_altsetting->desc.bInterfaceNumber,
+			data, 20, TIMEOUT);
+		if (status < 0) {
+			dev_warn(&xpad->intf->dev,
+				 "shanwan ctrl msg 1 failed: %d\n", status);
+			/* Non-fatal, continue */
+		}
+
+		/* Step 3: Control Msg 2 - Get Report, wValue=0x0000 */
+		status = usb_control_msg(xpad->udev,
+			usb_rcvctrlpipe(xpad->udev, 0),
+			0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_INTERFACE,
+			0x0000, xpad->intf->cur_altsetting->desc.bInterfaceNumber,
+			data, 8, TIMEOUT);
+		if (status < 0) {
+			dev_warn(&xpad->intf->dev,
+				 "shanwan ctrl msg 2 failed: %d\n", status);
+		}
+
+		/* Step 4: Rumble init - CRITICAL, Windows sends this! */
+		buf[0] = 0x02; buf[1] = 0x08; buf[2] = 0x03;
+		usb_interrupt_msg(xpad->udev, xpad->irq_out->pipe,
+				  buf, 3, &actual, TIMEOUT);
+
+		kfree(buf);
+		status = 0;
+		goto err_free_ctrl_data;
+	}
+
+	/* Non-shanwan QUIRK_360_START path (original code) */
+	if (xpad->quirks & QUIRK_360_START_PKT_1) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
-		    0x1, 0xc1,
-		    cpu_to_le16(0x100), cpu_to_le16(0x0), data, cpu_to_le16(20),
-		    TIMEOUT);
-
+		    0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_INTERFACE,
+		    0x0100, xpad->intf->cur_altsetting->desc.bInterfaceNumber,
+		    data, 20, TIMEOUT);
 #ifdef DEBUG
 	    dev_dbg(&xpad->intf->dev,
 		    "%s - control message 1 returned %d\n", __func__, status);
@@ -1699,12 +1760,12 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 #endif
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_2) || is_shanwan) {
+	if (xpad->quirks & QUIRK_360_START_PKT_2) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
-		    0x1, 0xc1,
-		    cpu_to_le16(0x0), cpu_to_le16(0x0), data, cpu_to_le16(8),
-		    TIMEOUT);
+		    0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_INTERFACE,
+		    0x0000, xpad->intf->cur_altsetting->desc.bInterfaceNumber,
+		    data, 8, TIMEOUT);
 #ifdef DEBUG
 	    dev_dbg(&xpad->intf->dev,
 		    "%s - control message 2 returned %d\n", __func__, status);
@@ -1720,12 +1781,12 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 #endif
 	}
 
-	if ((xpad->quirks & QUIRK_360_START_PKT_3) || is_shanwan) {
+	if (xpad->quirks & QUIRK_360_START_PKT_3) {
 	    status = usb_control_msg(xpad->udev,
 		    usb_rcvctrlpipe(xpad->udev, 0),
-		    0x1, 0xc0,
-		    cpu_to_le16(0x0), cpu_to_le16(0x0), data, cpu_to_le16(4),
-		    TIMEOUT);
+		    0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_DEVICE,
+		    0x0000, 0x0000,
+		    data, 4, TIMEOUT);
 #ifdef DEBUG
 	    dev_dbg(&xpad->intf->dev,
 		    "%s - control message 3 returned %d\n", __func__, status);
@@ -1746,6 +1807,89 @@ static int xpad_start_xbox_360(struct usb_xpad *xpad)
 err_free_ctrl_data:
 	kfree(data);
 	return status;
+}
+
+static int xpad_start_input(struct usb_xpad *xpad)
+{
+	int error;
+
+	if (xpad->xtype == XTYPE_XBOX360) {
+		error = xpad_start_xbox_360(xpad);
+		if (error)
+			return error;
+	}
+
+	error = usb_submit_urb(xpad->irq_in, GFP_KERNEL);
+	if (error && error != -EBUSY)
+		return -EIO;
+
+	if (xpad->xtype == XTYPE_XBOXONE) {
+		error = xpad_start_xbox_one(xpad);
+		if (error) {
+			usb_kill_urb(xpad->irq_in);
+			return error;
+		}
+	}
+	if (xpad->xtype == XTYPE_XBOX360) {
+		bool is_shanwan = (xpad->udev->manufacturer &&
+				  strcasecmp("shanwan", xpad->udev->manufacturer) == 0) ||
+				  le16_to_cpu(xpad->udev->descriptor.idVendor) == 0x20bc;
+
+		if (is_shanwan) {
+			/*
+			 * Steps 6-7 of Windows init sequence:
+			 * After IRQ IN is submitted, send ctrl msg 3 + LED confirm.
+			 */
+			u8 *buf;
+			int actual;
+			u8 dummy[4];
+
+			/* Step 6: Control Msg 3 - Get Device ID */
+			error = usb_control_msg_recv(xpad->udev, 0,
+						     0x01,
+						     USB_TYPE_VENDOR | USB_DIR_IN |
+							USB_RECIP_DEVICE,
+						     0x0000, 0x0000,
+						     dummy, sizeof(dummy),
+						     100, GFP_KERNEL);
+			if (error)
+				dev_warn(&xpad->dev->dev,
+					 "shanwan ctrl msg 3 failed: %d\n",
+					 error);
+
+			/* Step 7: LED confirm 01:03:06 */
+			buf = kzalloc(3, GFP_KERNEL);
+			if (buf) {
+				buf[0] = 0x01; buf[1] = 0x03; buf[2] = 0x06;
+				usb_interrupt_msg(xpad->udev,
+						  xpad->irq_out->pipe,
+						  buf, 3, &actual, 100);
+				kfree(buf);
+			}
+		} else {
+			/*
+			 * Non-shanwan Xbox 360 controllers:
+			 * Some third-party controllers require this
+			 * message to finish initialization.
+			 */
+			u8 dummy[20];
+
+			error = usb_control_msg_recv(xpad->udev, 0,
+						     0x01,
+						     USB_TYPE_VENDOR | USB_DIR_IN |
+							USB_RECIP_INTERFACE,
+						     0x0100,
+						     xpad->intf->cur_altsetting->desc.bInterfaceNumber,
+						     dummy, sizeof(dummy),
+						     50, GFP_KERNEL);
+			if (error)
+				dev_warn(&xpad->dev->dev,
+					 "unable to receive magic message: %d\n",
+					 error);
+		}
+	}
+
+	return 0;
 }
 
 static void xpadone_ack_mode_report(struct usb_xpad *xpad, u8 seq_num)
@@ -2029,50 +2173,7 @@ static int xpad_led_probe(struct usb_xpad *xpad) { return 0; }
 static void xpad_led_disconnect(struct usb_xpad *xpad) { }
 #endif
 
-static int xpad_start_input(struct usb_xpad *xpad)
-{
-	int error;
 
-	if (xpad->xtype == XTYPE_XBOX360) {
-		error = xpad_start_xbox_360(xpad);
-		if (error)
-			return error;
-	}
-
-	if (usb_submit_urb(xpad->irq_in, GFP_KERNEL))
-		return -EIO;
-
-	if (xpad->xtype == XTYPE_XBOXONE) {
-		error = xpad_start_xbox_one(xpad);
-		if (error) {
-			usb_kill_urb(xpad->irq_in);
-			return error;
-		}
-	}
-	if (xpad->xtype == XTYPE_XBOX360) {
-		/*
-		 * Some third-party controllers Xbox 360-style controllers
-		 * require this message to finish initialization.
-		 */
-		u8 dummy[20];
-
-		error = usb_control_msg_recv(xpad->udev, 0,
-					     /* bRequest */ 0x01,
-					     /* bmRequestType */
-					     USB_TYPE_VENDOR | USB_DIR_IN |
-						USB_RECIP_INTERFACE,
-					     /* wValue */ 0x100,
-					     /* wIndex */ 0x00,
-					     dummy, sizeof(dummy),
-					     25, GFP_KERNEL);
-		if (error)
-			dev_warn(&xpad->dev->dev,
-				 "unable to receive magic message: %d\n",
-				 error);
-	}
-
-	return 0;
-}
 
 static void xpad_stop_input(struct usb_xpad *xpad)
 {
@@ -2502,6 +2603,15 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 		timer_setup(&xpad->ghl_poke_timer, ghl_magic_poke, 0);
 		mod_timer(&xpad->ghl_poke_timer, jiffies + GHL_GUITAR_POKE_INTERVAL*HZ);
 	}
+
+	if (xpad->xtype == XTYPE_XBOX360 && 
+	    le16_to_cpu(udev->descriptor.idVendor) == 0x20bc && 
+	    le16_to_cpu(udev->descriptor.idProduct) == 0x515b) {
+		
+		/* Force Polling for Beitong KP40 */
+		usb_submit_urb(xpad->irq_in, GFP_KERNEL);
+	}
+
 	return 0;
 
 err_deinit_output:
@@ -2538,6 +2648,8 @@ static void xpad_disconnect(struct usb_interface *intf)
 		usb_free_urb(xpad->ghl_urb);
 		timer_delete_sync(&xpad->ghl_poke_timer);
 	}
+
+
 
 	usb_free_coherent(xpad->udev, XPAD_PKT_LEN,
 			xpad->idata, xpad->idata_dma);
