@@ -52,7 +52,7 @@ on:
 jobs:
   build:
     name: Build_${{ inputs.sub_level }}
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -92,7 +92,7 @@ jobs:
               ;;
           esac
 
-      - name: 安装依赖 & 初始化源码仓库
+      - name: 安装依赖 & 初始化源码仓库及工具链
         run: |
           rm -rf kernel_workspace
           mkdir kernel_workspace
@@ -103,13 +103,24 @@ jobs:
           sudo apt purge man-db &&
           sudo rm -rf /var/lib/man-db/auto-update &&
           sudo apt update &&
-          sudo apt-get install -y --no-install-recommends binutils python-is-python3 libssl-dev libelf-dev ccache p7zip-full clang llvm lld bc flex bison cpio kmod make patch aria2 wget git curl libfaketime &
+          sudo apt-get install -y --no-install-recommends binutils python-is-python3 libssl-dev libelf-dev ccache p7zip-full &
 
           echo "正在克隆源码仓库..."
           aria2c -s16 -x16 -k1M "https://android.googlesource.com/kernel/common/+archive/refs/${gz_branch}/android15-6.6-${os_patch_level}.tar.gz" -o common.tar.gz && \
           mkdir -p common && \
           tar -xzf common.tar.gz -C common && \
           rm -f common.tar.gz &
+
+          echo "正在克隆llvm-clang18工具链..." &&
+          mkdir -p clang18 &&
+          aria2c -s16 -x16 -k1M https://github.com/cctv18/oneplus_sm8650_toolchain/releases/download/LLVM-Clang18-r510928/clang-r510928.zip -o clang.zip &&
+          unzip -q clang.zip -d clang18 &&
+          rm -rf clang.zip &
+
+          echo "正在克隆构建工具..." &&
+          aria2c -s16 -x16 -k1M https://github.com/cctv18/oneplus_sm8650_toolchain/releases/download/LLVM-Clang18-r510928/build-tools.zip -o build-tools.zip &&
+          unzip -q build-tools.zip &&
+          rm -rf build-tools.zip &
 
           # 并行克隆所有补丁仓库
           echo "正在克隆补丁仓库..."
@@ -119,7 +130,7 @@ jobs:
           git clone https://github.com/cctv18/oppo_oplus_realme_sm8750.git &
 
           wait
-          echo "所有源码及补丁仓库初始化完成！"
+          echo "所有源码、工具链及补丁仓库初始化完成！"
           echo "正在去除 ABI 保护 & 去除 dirty 后缀..."
           rm common/android/abi_gki_protected_exports_* || true
           for f in common/scripts/setlocalversion; do
@@ -376,10 +387,13 @@ jobs:
         run: |
           WORKDIR="$(pwd)"
           export PATH="/usr/lib/ccache:$PATH"
+          export PATH="$WORKDIR/kernel_workspace/clang18/bin:$PATH"
+          export PATH="$WORKDIR/kernel_workspace/build-tools/bin:$PATH"
 
-          CLANG_VERSION="$(clang --version | head -n 1)"
-          LLD_VERSION="$(ld.lld --version | head -n 1)"
-          echo "编译器信息 (原生 ARM64):"
+          CLANG_DIR="$WORKDIR/kernel_workspace/clang18/bin"
+          CLANG_VERSION="$($CLANG_DIR/clang --version | head -n 1)"
+          LLD_VERSION="$($CLANG_DIR/ld.lld --version | head -n 1)"
+          echo "编译器信息:"
           echo "Clang版本: $CLANG_VERSION"
           echo "LLD版本: $LLD_VERSION"
 
@@ -396,15 +410,12 @@ jobs:
 
           export FAKESTAT="2025-05-25 12:00:00"
           export FAKETIME="@2025-05-25 13:00:00"
-          # 编译 libfakestat (文件时间戳劫持)
-          git clone --depth 1 https://github.com/cctv18/libfakestat.git
-          cd libfakestat/src && make && cd ../..
-          FAKESTAT_LIB="$(pwd)/libfakestat/src/libfakestat.so"
-
-          # 获取 libfaketime (系统时间劫持)
-          FAKETIME_LIB="/usr/lib/aarch64-linux-gnu/faketime/libfaketimeMT.so.1"
-          [ -f "$FAKETIME_LIB" ] || { echo "错误: libfaketime 不可用"; exit 1; }
-          export PRELOAD_LIBS="$FAKESTAT_LIB $FAKETIME_LIB"
+          # 下载时间劫持库
+          wget https://github.com/cctv18/oppo_oplus_realme_sm8750/raw/refs/heads/main/lib/libfakestat.so
+          wget https://github.com/cctv18/oppo_oplus_realme_sm8750/raw/refs/heads/main/lib/libfaketimeMT.so
+          chmod 777 ./*.so
+          SO_DIR=$(pwd)
+          export PRELOAD_LIBS="$SO_DIR/libfakestat.so $SO_DIR/libfaketimeMT.so"
 
           # 创建 CC (编译器) 包装器
           echo '#!/bin/bash' > cc-wrapper
@@ -431,9 +442,8 @@ jobs:
           sudo rm -rf /opt/ghc &
           sudo rm -rf /opt/hostedtoolcache/CodeQL &
 
-          # ARM64 原生编译，无需 CROSS_COMPILE
-          make -j$(nproc --all) LLVM=1 ARCH=arm64 CC="ccache clang" LD="ld.lld" HOSTLD=ld.lld O=out KCFLAGS+=-O2 KCFLAGS+=-Wno-error gki_defconfig &&
-          make -j$(nproc --all) LLVM=1 ARCH=arm64 CC="$(pwd)/cc-wrapper" LD="$(pwd)/ld-wrapper" HOSTLD=ld.lld O=out KCFLAGS+=-O2 KCFLAGS+=-Wno-error Image
+          make -j$(nproc --all) LLVM=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CC="ccache clang" LD="ld.lld" HOSTLD=ld.lld O=out KCFLAGS+=-O2 KCFLAGS+=-Wno-error gki_defconfig &&
+          make -j$(nproc --all) LLVM=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CC="$(pwd)/cc-wrapper" LD="$(pwd)/ld-wrapper" HOSTLD=ld.lld O=out KCFLAGS+=-O2 KCFLAGS+=-Wno-error Image
 
           echo "内核编译完成！"
           echo "ccache状态："
@@ -455,12 +465,12 @@ jobs:
           # 下载 AOSP 工具链
           AOSP_MIRROR=https://android.googlesource.com
           BRANCH=main-kernel-build-2024
+          git clone $AOSP_MIRROR/kernel/prebuilts/build-tools -b $BRANCH --depth 1 kernel-build-tools
           git clone $AOSP_MIRROR/platform/system/tools/mkbootimg -b $BRANCH --depth 1 mkbootimg
-          git clone $AOSP_MIRROR/platform/external/avb -b main --depth 1 avb
 
-          AVBTOOL="$GITHUB_WORKSPACE/kernel_workspace/avb/avbtool.py"
-          MKBOOTIMG="$GITHUB_WORKSPACE/kernel_workspace/mkbootimg/mkbootimg.py"
-          BOOT_SIGN_KEY_PATH=$GITHUB_WORKSPACE/kernel_workspace/avb/testkey_rsa4096.pem
+          AVBTOOL=$GITHUB_WORKSPACE/kernel_workspace/kernel-build-tools/linux-x86/bin/avbtool
+          MKBOOTIMG=$GITHUB_WORKSPACE/kernel_workspace/mkbootimg/mkbootimg.py
+          BOOT_SIGN_KEY_PATH=$GITHUB_WORKSPACE/kernel_workspace/kernel-build-tools/linux-x86/share/avb/testkey_rsa4096.pem
 
           # 使用自定义密钥
           echo "$BOOT_SIGN_KEY" > $BOOT_SIGN_KEY_PATH
