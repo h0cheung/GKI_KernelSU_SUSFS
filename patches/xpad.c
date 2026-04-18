@@ -316,6 +316,7 @@ static const struct xpad_device {
 	{ 0x0f30, 0x010b, "Philips Recoil", 0, XTYPE_XBOX },
 	{ 0x0f30, 0x0202, "Joytech Advanced Controller", 0, XTYPE_XBOX },
 	{ 0x0f30, 0x8888, "BigBen XBMiniPad Controller", 0, XTYPE_XBOX },
+	{ 0x1023, 0x0dbf, "LeadJoy Xeno Plus", 0, XTYPE_XBOX360 },
 	{ 0x102c, 0xff0c, "Joytech Wireless Advanced Controller", 0, XTYPE_XBOX },
 	{ 0x1038, 0x1430, "SteelSeries Stratus Duo", 0, XTYPE_XBOX360 },
 	{ 0x1038, 0x1431, "SteelSeries Stratus Duo", 0, XTYPE_XBOX360 },
@@ -2606,18 +2607,12 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 		mod_timer(&xpad->ghl_poke_timer, jiffies + GHL_GUITAR_POKE_INTERVAL*HZ);
 	}
 
-	dev_info(&intf->dev, "KP40 probe check: xtype=%d VID=%04x PID=%04x\n",
-		 xpad->xtype,
-		 le16_to_cpu(udev->descriptor.idVendor),
-		 le16_to_cpu(udev->descriptor.idProduct));
-
 	if (xpad->xtype == XTYPE_XBOX360 && 
 	    le16_to_cpu(udev->descriptor.idVendor) == 0x20bc && 
 	    le16_to_cpu(udev->descriptor.idProduct) == 0x515b) {
 		/* Prevent USB autosuspend from disconnecting the device */
 		usb_disable_autosuspend(udev);
 		udev->quirks |= USB_QUIRK_RESET_RESUME;
-		dev_info(&intf->dev, "KP40: autosuspend disabled\n");
 		/*
 		 * Beitong KP40 (ShanWan chip) full init sequence.
 		 * Must happen during probe - the controller disconnects
@@ -2636,7 +2631,7 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 		 */
 		u8 *buf;
 		char *data;
-		int actual, status;
+		int actual;
 
 		buf = kzalloc(8, GFP_KERNEL);
 		data = kzalloc(20, GFP_KERNEL);
@@ -2652,20 +2647,18 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 				  buf, 3, &actual, 100);
 
 		/* Step 2: Control Msg 1 */
-		status = usb_control_msg(udev,
-			usb_rcvctrlpipe(udev, 0),
-			0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_INTERFACE,
-			0x0100, intf->cur_altsetting->desc.bInterfaceNumber,
-			data, 20, 100);
-		dev_info(&intf->dev, "KP40 ctrl msg 1: %d\n", status);
+		usb_control_msg(udev,
+				usb_rcvctrlpipe(udev, 0),
+				0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_INTERFACE,
+				0x0100, intf->cur_altsetting->desc.bInterfaceNumber,
+				data, 20, 100);
 
 		/* Step 3: Control Msg 2 */
-		status = usb_control_msg(udev,
-			usb_rcvctrlpipe(udev, 0),
-			0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_INTERFACE,
-			0x0000, intf->cur_altsetting->desc.bInterfaceNumber,
-			data, 8, 100);
-		dev_info(&intf->dev, "KP40 ctrl msg 2: %d\n", status);
+		usb_control_msg(udev,
+				usb_rcvctrlpipe(udev, 0),
+				0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_INTERFACE,
+				0x0000, intf->cur_altsetting->desc.bInterfaceNumber,
+				data, 8, 100);
 
 		/* Step 4: Rumble init */
 		buf[0] = 0x02; buf[1] = 0x08; buf[2] = 0x03;
@@ -2676,12 +2669,11 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 		usb_submit_urb(xpad->irq_in, GFP_KERNEL);
 
 		/* Step 6: Control Msg 3 */
-		status = usb_control_msg(udev,
-			usb_rcvctrlpipe(udev, 0),
-			0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_DEVICE,
-			0x0000, 0x0000,
-			data, 4, 100);
-		dev_info(&intf->dev, "KP40 ctrl msg 3: %d\n", status);
+		usb_control_msg(udev,
+				usb_rcvctrlpipe(udev, 0),
+				0x01, USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_DEVICE,
+				0x0000, 0x0000,
+				data, 4, 100);
 
 		/* Step 7: LED confirm */
 		buf[0] = 0x01; buf[1] = 0x03; buf[2] = 0x06;
@@ -2690,7 +2682,6 @@ static int xpad_probe(struct usb_interface *intf, const struct usb_device_id *id
 
 		kfree(buf);
 		kfree(data);
-		dev_info(&intf->dev, "KP40 init sequence complete\n");
 	}
 skip_kp40_init:
 
