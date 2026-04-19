@@ -271,6 +271,34 @@ jobs:
           cp ../kernel_patches/common/unicode_bypass_fix_6.1+.patch ./unicode_bypass_fix.patch
           patch -p1 -F 3 < unicode_bypass_fix.patch || true
 
+      - name: 应用 lz4armv8 硬件加速补丁
+        run: |
+          echo "正在添加 lz4armv8 硬件加速补丁..."
+          cd kernel_workspace/common
+          if [ ! -f "fs/f2fs/lz4armv8/lz4accel.c" ] || [ ! -f "fs/f2fs/lz4armv8/lz4accel.h" ] || [ ! -f "fs/f2fs/lz4armv8/lz4armv8.S" ]; then
+            cp $GITHUB_WORKSPACE/patches/lz4armv8_support.patch ./
+            if patch -p1 --ignore-whitespace -F 3 < lz4armv8_support.patch; then
+              echo "lz4armv8 硬件加速补丁应用成功"
+            else
+              echo "::warning::lz4armv8 硬件加速补丁应用失败，请检查日志"
+            fi
+            rm -f lz4armv8_support.patch
+          fi
+
+      - name: 应用 ADIOS IO 调度器补丁
+        run: |
+          echo "正在添加 ADIOS IO 调度器补丁..."
+          cd kernel_workspace/common
+          if [ ! -f "block/adios.c" ] || ! grep -q "config MQ_IOSCHED_ADIOS" block/Kconfig.iosched; then
+            cp $GITHUB_WORKSPACE/patches/adios_ioscheduler.patch ./
+            if patch -p1 --ignore-whitespace -F 3 < adios_ioscheduler.patch; then
+              echo "ADIOS IO 调度器补丁应用成功"
+            else
+              echo "::warning::ADIOS IO 调度器补丁应用失败，请检查日志"
+            fi
+            rm -f adios_ioscheduler.patch
+          fi
+
       - name: 应用 lz4 1.10.0 & zstd 1.5.7 补丁
         run: |
           echo "正在添加 lz4 1.10.0 & zstd 1.5.7 补丁…"
@@ -316,6 +344,9 @@ jobs:
           echo "CONFIG_CRYPTO_LZ4HC=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_CRYPTO_LZ4KD=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_CRYPTO_ZSTD=y" >> ./common/arch/arm64/configs/gki_defconfig
+          echo "CONFIG_KERNEL_MODE_NEON=y" >> ./common/arch/arm64/configs/gki_defconfig
+          echo "CONFIG_MQ_IOSCHED_ADIOS=y" >> ./common/arch/arm64/configs/gki_defconfig
+          echo "CONFIG_MQ_IOSCHED_DEFAULT_ADIOS=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_F2FS_FS_COMPRESSION=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_F2FS_FS_LZ4=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_F2FS_FS_LZ4HC=y" >> ./common/arch/arm64/configs/gki_defconfig
