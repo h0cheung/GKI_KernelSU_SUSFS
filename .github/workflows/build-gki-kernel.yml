@@ -275,9 +275,13 @@ jobs:
         run: |
           echo "正在添加 lz4armv8 硬件加速补丁..."
           cd kernel_workspace/common
-          if [ ! -f "fs/f2fs/lz4armv8/lz4accel.c" ]; then
+          if [ ! -f "fs/f2fs/lz4armv8/lz4accel.c" ] || [ ! -f "fs/f2fs/lz4armv8/lz4accel.h" ] || [ ! -f "fs/f2fs/lz4armv8/lz4armv8.S" ]; then
             cp $GITHUB_WORKSPACE/patches/lz4armv8_support.patch ./
-            patch -p1 --ignore-whitespace -F 3 < lz4armv8_support.patch || true
+            if patch -p1 --ignore-whitespace -F 3 < lz4armv8_support.patch; then
+              echo "lz4armv8 硬件加速补丁应用成功"
+            else
+              echo "::warning::lz4armv8 硬件加速补丁应用失败，请检查日志"
+            fi
             rm -f lz4armv8_support.patch
           fi
 
@@ -285,9 +289,13 @@ jobs:
         run: |
           echo "正在添加 ADIOS IO 调度器补丁..."
           cd kernel_workspace/common
-          if [ ! -f "block/adios.c" ]; then
+          if [ ! -f "block/adios.c" ] || ! grep -q "config MQ_IOSCHED_ADIOS" block/Kconfig.iosched; then
             cp $GITHUB_WORKSPACE/patches/adios_ioscheduler.patch ./
-            patch -p1 --ignore-whitespace -F 3 < adios_ioscheduler.patch || true
+            if patch -p1 --ignore-whitespace -F 3 < adios_ioscheduler.patch; then
+              echo "ADIOS IO 调度器补丁应用成功"
+            else
+              echo "::warning::ADIOS IO 调度器补丁应用失败，请检查日志"
+            fi
             rm -f adios_ioscheduler.patch
           fi
 

@@ -2061,7 +2061,6 @@ index 0000000000000..803691d5d29b7
 +MODULE_AUTHOR(ADIOS_AUTHOR);
 +MODULE_LICENSE("GPL");
 +MODULE_DESCRIPTION(ADIOS_PROGNAME);
-\ No newline at end of file
 diff --git a/block/elevator.c b/block/elevator.c
 index 5ff093cb3cf8f..1cbc62507c187 100644
 --- a/block/elevator.c

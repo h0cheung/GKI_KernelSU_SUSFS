@@ -3,7 +3,8 @@ new file mode 100644
 index 0000000000000..dae52ab3b8d32
 --- /dev/null
 +++ b/fs/f2fs/lz4armv8/lz4accel.c
-@@ -0,0 +1,49 @@
+@@ -0,0 +1,50 @@
++// SPDX-License-Identifier: GPL-2.0
 +#include "lz4accel.h"
 +#include <asm/cputype.h>
 +
@@ -35,7 +36,7 @@ index 0000000000000..dae52ab3b8d32
 +			      const uint8_t *src_end, bool dip) {
 +	const unsigned i = smp_processor_id();
 +
-+	switch(read_cpuid_part_number()) {
++	switch (read_cpuid_part_number()) {
 +	case ARM_CPU_PART_CORTEX_A53:
 +		lz4_decompress_asm_fn[i] = _lz4_decompress_asm_noprfm;
 +		return _lz4_decompress_asm_noprfm(dst_ptr, dst_begin, dst_end,
