@@ -17,8 +17,14 @@ on:
         options:
           - '56'
           - '89'
+          - '118'
           - '最新'
-        default: '89'
+        default: '118'
+      avb_security_patch:
+        description: "🔒AVB 签名安全补丁日期（仅用于 avbtool 签名）"
+        required: false
+        type: string
+        default: '2026-02-05'
       kernelsu_variant:
         description: "选择 KernelSU"
         required: true
@@ -68,7 +74,6 @@ jobs:
               echo "releases=TB322FC_1.1.11.120" >> $GITHUB_ENV
               echo "AVB_ROLLBACK_INDEX=1738713600" >> $GITHUB_ENV
               echo "AVB_FINGERPRINT=Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.10.043_250510_PRC:user/release-keys" >> $GITHUB_ENV
-              echo "AVB_SECURITY_PATCH=2025-02-05" >> $GITHUB_ENV
               ;;
             89)
               echo "sub_level=6.6.89" >> $GITHUB_ENV
@@ -78,7 +83,15 @@ jobs:
               echo "releases=TB322FC_1.1.11.263" >> $GITHUB_ENV
               echo "AVB_ROLLBACK_INDEX=1757364229" >> $GITHUB_ENV
               echo "AVB_FINGERPRINT=Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.11.263_251105_PRC:user/release-keys" >> $GITHUB_ENV
-              echo "AVB_SECURITY_PATCH=2025-02-05" >> $GITHUB_ENV
+              ;;
+            118)
+              echo "sub_level=6.6.118" >> $GITHUB_ENV
+              echo "os_patch_level=2026-01" >> $GITHUB_ENV
+              echo "KERNEL_NAME=6.6.118-android15-8-g350f378eb496-ab14943902-4k" >> $GITHUB_ENV
+              echo "KERNEL_TIME=Thu Feb 26 02:40:50 UTC 2026" >> $GITHUB_ENV
+              echo "releases=TB322_ZUXOS_1.5.10.183" >> $GITHUB_ENV
+              echo "AVB_ROLLBACK_INDEX=1757364229" >> $GITHUB_ENV
+              echo "AVB_FINGERPRINT=Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.11.263_251105_PRC:user/release-keys" >> $GITHUB_ENV
               ;;
             最新)
               echo "sub_level=6.6.lts" >> $GITHUB_ENV
@@ -88,7 +101,6 @@ jobs:
               echo "releases=TB322FC_1.1.11.263" >> $GITHUB_ENV
               echo "AVB_ROLLBACK_INDEX=1757364229" >> $GITHUB_ENV
               echo "AVB_FINGERPRINT=Lenovo/TB322FC_PRC/TB322FC:15/AQ3A.250129.001/ZUXOS_1.1.11.263_251105_PRC:user/release-keys" >> $GITHUB_ENV
-              echo "AVB_SECURITY_PATCH=2025-02-05" >> $GITHUB_ENV
               ;;
           esac
 
@@ -510,7 +522,7 @@ jobs:
 
           echo "Building boot.img"
           $MKBOOTIMG --header_version 4 --kernel Image --output boot.img
-          $AVBTOOL add_hash_footer --partition_name boot --partition_size $((96 * 1024 * 1024)) --image boot.img --algorithm SHA256_RSA4096 --key $BOOT_SIGN_KEY_PATH --rollback_index ${{ env.AVB_ROLLBACK_INDEX }} --prop 'com.android.build.boot.os_version:15' --prop 'com.android.build.boot.fingerprint:${{ env.AVB_FINGERPRINT }}' --prop 'com.android.build.boot.security_patch:${{ env.AVB_SECURITY_PATCH }}'
+          $AVBTOOL add_hash_footer --partition_name boot --partition_size $((96 * 1024 * 1024)) --image boot.img --algorithm SHA256_RSA4096 --key $BOOT_SIGN_KEY_PATH --rollback_index ${{ env.AVB_ROLLBACK_INDEX }} --prop 'com.android.build.boot.os_version:15' --prop 'com.android.build.boot.fingerprint:${{ env.AVB_FINGERPRINT }}' --prop 'com.android.build.boot.security_patch:${{ inputs.avb_security_patch }}'
 
           # 重命名为有意义的文件名
           mv boot.img android15-${{ env.sub_level }}-boot.img
